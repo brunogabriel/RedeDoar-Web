@@ -1,6 +1,6 @@
 import debug from 'debug'
 import { createServer } from 'http'
-import app from './api'
+import app from './src'
 
 const server = createServer(app)
 

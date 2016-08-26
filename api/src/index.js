@@ -2,7 +2,7 @@ import express from 'express'
 let app = express()
 
 app.get('/', (req, res) => {
-  res.send('hello world')
+  res.send({ hello: 'world' })
 })
 
 app.use((err, req, res, next) => {
