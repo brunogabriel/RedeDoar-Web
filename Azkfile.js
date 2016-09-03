@@ -35,13 +35,14 @@ systems({
       '/data/db': persistent('mongodb-#{manifest.dir}'),
     },
     ports: {
-      http: '28017:28017/tcp',
+      data: '32770:27017/tcp'
     },
     http: {
       domains: ['#{manifest.dir}-#{system.name}.#{azk.default_domain}'],
     },
     export_envs: {
       MONGODB_URI: 'mongodb://#{net.host}:#{net.port[27017]}/#{manifest.dir}_development',
+      MONGODB_URI_TEST: 'mongodb://#{net.host}:#{net.port[27017]}/#{manifest.dir}_test'
     },
   },
   admin: {
