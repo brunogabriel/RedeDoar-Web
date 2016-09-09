@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import Promise from 'bluebird'
+import bodyParser from 'body-parser'
 import routes from './routes'
 
 mongoose.Promise = Promise
@@ -14,6 +15,8 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 
 let app = express()
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use('/', routes)
 
 export default app

@@ -7,6 +7,7 @@ import { User } from '../../models'
 import { accessTokenRequired } from '../filters'
 
 import login from './login'
+import loginWeb from './login_web'
 import loginCallback from './login_callback'
 import profile from './profile'
 
@@ -18,7 +19,8 @@ FB.options({
   redirectUri: config.facebook.redirectUri
 });
 
-router.get('/login', login)
+router.post('/login', login)
+router.get('/login-web', loginWeb)
 router.get('/login/callback', loginCallback)
 router.get('/profile', accessTokenRequired, profile)
 

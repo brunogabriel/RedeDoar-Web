@@ -7,6 +7,8 @@ const schema = mongoose.Schema({
   birthday: Date,
   phone: String,
   score: Number,
+  picture: String,
+  language: String,
   facebook: {
     id: String,
     accessToken: String,
@@ -14,7 +16,7 @@ const schema = mongoose.Schema({
     expires: Date
   },
   mobileDevices: [{
-    pushID: String,
+    pushId: String,
     platform: String,
     lastUpdate: {
       type: Date,

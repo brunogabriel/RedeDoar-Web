@@ -1,6 +1,7 @@
 import FB from 'fb'
 import Step from 'step'
 import { User } from '../../models'
+import config from '../../config'
 
 export default (req, res, next) => {
   let code = req.query.code
@@ -37,7 +38,7 @@ export default (req, res, next) => {
       let expires = result.expires || 0
       let parameters = {
         access_token: result.access_token,
-        fields: home.fields
+        fields: config.facebook.fields
       }
 
       FB.api('/me/', 'get', parameters, (result) => {
