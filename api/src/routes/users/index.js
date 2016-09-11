@@ -22,6 +22,6 @@ FB.options({
 router.post('/login', login)
 router.get('/login-web', loginWeb)
 router.get('/login/callback', loginCallback)
-router.get('/profile', accessTokenRequired, profile)
+router.post('/profile', accessTokenRequired, profile)
 
 export default router
