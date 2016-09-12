@@ -1,7 +1,7 @@
 import { User } from '../../models'
 
 export default (req, res, next) => {
-  const access_token = req.query.access_token || req.body.access_token
+  const access_token = req.query.token || req.body.token
   return User.byAccessToken(access_token).then((user) => {
     if (user) {
       res.send({
