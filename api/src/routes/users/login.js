@@ -35,11 +35,13 @@ export default (req, res, next) => {
           }
           if (!user) {
             return User.createAccount(user_data).then((user) => {
+              let notifications_count = 101
               return res.send({
                 status: true,
                 new_account: true,
                 access_token: access_token,
-                data: user
+                data: user,
+                notifications: notifications_count
               })
             })
           } else {
@@ -57,11 +59,13 @@ export default (req, res, next) => {
             user.update(user_data).then((data) => {
               if (data.ok) {
                 return User.findById(user.id).then((user) => {
+                  let notifications_count = 101
                   return res.send({
                     status: true,
                     new_account: false,
                     access_token: access_token,
-                    data: user
+                    data: user,
+                    notifications: notifications_count
                   })
                 })
               } else {
