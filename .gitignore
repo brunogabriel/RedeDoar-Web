@@ -39,3 +39,5 @@ jspm_packages
 # Others
 .DS_Store
 .azk
+api/public/uploads/*
+tmp/*

@@ -11,6 +11,8 @@ systems({
     wait: 20,
     mounts: {
       '/azk/#{manifest.dir}': sync('./api'),
+      '/azk/#{manifest.dir}/public': path('./api/public'),
+      '/azk/#{manifest.dir}/tmp': path('./api/tmp'),
       '/azk/#{manifest.dir}/node_modules': persistent('./node_modules'),
     },
     scalable: {'default': 1},
@@ -24,7 +26,8 @@ systems({
     envs: {
       NODE_ENV: 'dev',
       HOST: '0.0.0.0',
-      PORT: '8000'
+      PORT: '8000',
+      DROP_DATABASE: false
     },
   },
   'mongodb': {

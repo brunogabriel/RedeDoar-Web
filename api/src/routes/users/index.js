@@ -1,6 +1,5 @@
 import express from 'express'
 import FB from 'fb'
-import Step from 'step'
 
 import config from '../../config'
 import { User } from '../../models'

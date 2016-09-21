@@ -3,9 +3,12 @@ const router = express.Router()
 
 import home from './home'
 import users from './users'
+import products from './products'
 
 router.use('/', home)
 router.use('/users', users)
+router.use('/products', products)
+router.use(express.static('public'))
 
 router.use((err, req, res, next) => {
   let message = err.message
