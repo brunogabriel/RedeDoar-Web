@@ -17,7 +17,13 @@ let storage = multer.diskStorage({
     let originalname = file.originalname
     let extension = originalname.split('.').reverse().shift()
     let filename = hat() + '.' + extension
-    cb(null, filename)
+    console.log(extension);
+    // https://www.npmjs.com/package/mime-types
+    if (extension != 'jpg') {
+      cb('Arquivo inválido')
+    } else {
+      cb(null, filename)
+    }
   }
 })
 let upload = multer({ storage: storage })
