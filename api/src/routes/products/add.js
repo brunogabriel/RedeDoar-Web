@@ -1,37 +1,5 @@
 import { Product } from '../../models'
-import fs from 'fs'
-import path from 'path'
-import im from 'imagemagick'
-import Promise from 'bluebird'
-import _ from 'lodash'
-
-const imCrop = Promise.promisify(im.crop)
-
-const removeFiles = (files) => {
-  if (files) {
-    files.forEach((item) => {
-      if (item.path) {
-        fs.unlink(item.path)
-      }
-    })
-  }
-}
-
-const cropFiles = (files, config) => {
-  var items = []
-  files.map((file) => {
-    for (let size in config.sizes) {
-      let default_options = {
-        srcPath: file.path,
-        dstPath: config.output + size + '_' + file.filename,
-        quality: 0.8,
-        format: 'jpg'
-      }
-      items.push(imCrop(_.assign(default_options, config.sizes[size])))
-    }
-  })
-  return Promise.all(items)
-}
+import { cropFiles, removeFiles } from '../../helpers'
 
 export default (req, res, next) => {
   if (true) {

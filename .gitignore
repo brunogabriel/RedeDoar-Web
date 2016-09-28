@@ -40,4 +40,4 @@ jspm_packages
 .DS_Store
 .azk
 api/public/uploads/*
-tmp/*
+api/tmp/*

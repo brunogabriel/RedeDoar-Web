@@ -1,15 +1,16 @@
 import express from 'express'
 import multer from 'multer'
 import hat from 'hat'
+import _ from 'lodash'
 
 import { Product } from '../../models'
+import { authenticated } from '../filters'
 import list from './list'
 import add from './add'
 
 const router = express.Router()
-// let upload = multer({ dest: 'tmp' })
 
-let storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'tmp')
   },
@@ -17,18 +18,21 @@ let storage = multer.diskStorage({
     let originalname = file.originalname
     let extension = originalname.split('.').reverse().shift()
     let filename = hat() + '.' + extension
-    console.log(extension);
-    // https://www.npmjs.com/package/mime-types
-    if (extension != 'jpg') {
-      cb('Arquivo inválido')
-    } else {
-      cb(null, filename)
-    }
+    cb(null, filename)
   }
 })
-let upload = multer({ storage: storage })
 
-router.post('/', list)
-router.post('/add', upload.any(), add)
+const fileFilter = (req, file, cb) => {
+  if (_.startsWith(file.mimetype, 'image')) {
+    cb(null, true)
+  } else {
+    cb(new Error('Arquivo inválido, precisa ser uma imagem: jpg, png ou gif'))
+  }
+}
+
+let upload = multer({ storage: storage, fileFilter: fileFilter })
+
+router.post('/', authenticated, list)
+router.post('/add', authenticated, upload.any(), add)
 
 export default router
