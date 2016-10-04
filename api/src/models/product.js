@@ -8,7 +8,10 @@ const Image = mongoose.Schema({
 })
 
 const Comment = mongoose.Schema({
-  comment: String,
+  comment: {
+    type: String,
+    minlength: [3, 'Digite seu comentário']
+  },
   reply: String,
   user: {
     type: mongoose.Schema.Types.ObjectId,

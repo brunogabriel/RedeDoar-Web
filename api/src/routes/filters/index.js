@@ -12,21 +12,17 @@ export const accessTokenRequired = (req, res, next) => {
 }
 
 export const authenticated = (req, res, next) => {
-  // Testes
-  next()
-
-  // Descomentar
-  // return accessTokenRequired(req, res, (access_token) => {
-  //   return User.byAccessToken(access_token).then((user) => {
-  //     if (user) {
-  //       req.user = user
-  //       next()
-  //     } else {
-  //       return res.send({
-  //         status: false,
-  //         message: 'Você precisa se logar para acessar essa página'
-  //       })
-  //     }
-  //   })
-  // })
+  return accessTokenRequired(req, res, (access_token) => {
+    return User.byAccessToken(access_token).then((user) => {
+      if (user) {
+        req.user = user
+        next()
+      } else {
+        return res.send({
+          status: false,
+          message: 'Você precisa se logar para acessar essa página'
+        })
+      }
+    })
+  })
 }

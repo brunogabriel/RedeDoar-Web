@@ -6,6 +6,7 @@ import _ from 'lodash'
 import { Product } from '../../models'
 import list from './list'
 import add from './add'
+import comment from './comment'
 
 const router = express.Router()
 
@@ -33,5 +34,6 @@ let upload = multer({ storage: storage, fileFilter: fileFilter })
 
 router.post('/', list)
 router.post('/add', upload.any(), add)
+router.post('/:id/comment', comment)
 
 export default router
