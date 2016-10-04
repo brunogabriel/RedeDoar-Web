@@ -1,12 +1,24 @@
+import fs from 'fs'
 import path from 'path'
 import im from 'imagemagick'
-import Promise from 'bluebird'
 import _ from 'lodash'
+import { removeFiles } from './'
+import Promise from 'bluebird'
 
 const imCrop = Promise.promisify(im.crop)
 
 const cropFiles = (files, config) => {
-  var items = []
+  try {
+    fs.accessSync(config.output)
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      fs.mkdirSync(config.output)
+    }
+  }
+
+  let items = []
+  let promises = []
+
   files.map((file) => {
     for (let size in config.sizes) {
       let default_options = {
@@ -15,10 +27,20 @@ const cropFiles = (files, config) => {
         quality: 0.7,
         format: 'jpg'
       }
-      items.push(imCrop(_.assign(default_options, config.sizes[size])))
+      let options = _.assign(default_options, config.sizes[size])
+      promises.push(imCrop(options))
     }
+    items.push({
+      filename: file.filename,
+      directory: config.output
+    })
   })
-  return Promise.all(items)
+
+  Promise.all(promises).then((err) => {
+    removeFiles(files)
+  })
+
+  return items
 }
 
 export default cropFiles

@@ -4,7 +4,6 @@ import hat from 'hat'
 import _ from 'lodash'
 
 import { Product } from '../../models'
-import { authenticated } from '../filters'
 import list from './list'
 import add from './add'
 
@@ -32,7 +31,7 @@ const fileFilter = (req, file, cb) => {
 
 let upload = multer({ storage: storage, fileFilter: fileFilter })
 
-router.post('/', authenticated, list)
-router.post('/add', authenticated, upload.any(), add)
+router.post('/', list)
+router.post('/add', upload.any(), add)
 
 export default router

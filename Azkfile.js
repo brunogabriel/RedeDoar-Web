@@ -20,7 +20,7 @@ systems({
       domains: [ '#{system.name}.#{azk.default_domain}' ]
     },
     ports: {
-      http: '8000/tcp',
+      http: '3000:8000/tcp',
       livereload: '35729:35729/tcp'
     },
     envs: {

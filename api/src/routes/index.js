@@ -1,6 +1,7 @@
 import express from 'express'
 const router = express.Router()
 
+import { authenticated } from './filters'
 import home from './home'
 import users from './users'
 import products from './products'
@@ -8,8 +9,8 @@ import product_categories from './product_categories'
 
 router.use('/', home)
 router.use('/users', users)
-router.use('/products', products)
-router.use('/product_categories', product_categories)
+router.use('/products', authenticated, products)
+router.use('/product_categories', authenticated, product_categories)
 router.use(express.static('public'))
 
 router.use((err, req, res, next) => {

@@ -8,6 +8,17 @@ export default (req, res, next) => {
   //   })
   // })
 
+  // let data = []
+  // data.push({ name: 'Food' })
+  // data.push({ name: 'Forniture' })
+  // data.push({ name: 'Clothes' })
+  // data.push({ name: 'Kids' })
+  // data.push({ name: 'Eletronics' })
+  // ProductCategory.collection.insert(data, (err, data) => {
+  //   if (err) new Error(err);
+  //   console.log('data', data);
+  // })
+
   let product_categories = []
 
   product_categories.push({
