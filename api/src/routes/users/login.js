@@ -9,11 +9,22 @@ export default (req, res, next) => {
       access_token: access_token,
       fields: config.facebook.fields
     }
+    console.log(parameters);
     FB.api('/me/', 'get', parameters, (result) => {
+      console.log("---");
+      console.log(result);
+      console.log("---");
       if (result.error) {
+        let error = {
+          cause: result.error.message,
+          type: result.error.type,
+          code: result.error.code,
+          fbtrace_id: result.error.fbtrace_id
+        }
         return res.send({
           status: false,
-          error: result.error
+          message: 'Falha ao efetuar login, usuário não encontrado',
+          error: error
         })
       } else {
         return User.hasFacebookId(result.id).then((user) => {
