@@ -1,17 +1,22 @@
 import { Product } from '../../models'
-import { cropFiles, productView } from '../../helpers'
+import { cropFiles, productImage, productView } from '../../helpers'
 
 export default (req, res, next) => {
-  let product = new Product(req.body)
-  return product.save().then((product) => {
+  let product = req.product
+  return product.patchEntity(req.body).save().then((product) => {
     let options = product.getImageOptions()
     let images = cropFiles(req.files, options)
     let output = {
       status: true,
-      message: 'Produto adicionado com sucesso'
+      message: 'Produto alterado com sucesso'
     }
 
     if (images) {
+      for (let i in images) {
+        if (product.images[i]) {
+          productImage.remove(product.images[i])
+        }
+      }
       product.images = images
       product.save((err) => {
         if (err) new Error(err)

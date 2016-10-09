@@ -10,7 +10,7 @@ import product_favorites from './product_favorites'
 
 router.use('/', home)
 router.use('/users', users)
-router.use('/products', authenticated, products)
+router.use('/products', products)
 router.use('/product_categories', authenticated, product_categories)
 router.use('/product_favorites', authenticated, product_favorites)
 router.use(express.static('public'))

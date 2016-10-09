@@ -6,7 +6,9 @@ import _ from 'lodash'
 import { Product } from '../../models'
 import list from './list'
 import add from './add'
+import edit from './edit'
 import comment from './comment'
+import { validProduct, authenticated } from '../filters'
 
 const router = express.Router()
 
@@ -32,8 +34,9 @@ const fileFilter = (req, file, cb) => {
 
 let upload = multer({ storage: storage, fileFilter: fileFilter })
 
-router.post('/', list)
-router.post('/add', upload.any(), add)
-router.post('/:id/comment', comment)
+router.post('/', authenticated, list)
+router.post('/add', upload.any(), authenticated, add)
+router.post('/:product_id/comment', authenticated, validProduct, comment)
+router.post('/:product_id/edit', upload.any(), authenticated, validProduct, edit)
 
 export default router
