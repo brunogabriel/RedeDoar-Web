@@ -38,6 +38,10 @@ const schema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'ProductCategory'
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   images: [Image],
   comments: [Comment],
   contact_type: String,

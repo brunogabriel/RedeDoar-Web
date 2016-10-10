@@ -7,8 +7,9 @@ import { Product } from '../../models'
 import list from './list'
 import add from './add'
 import edit from './edit'
+import remove from './remove'
 import comment from './comment'
-import { validProduct, authenticated } from '../filters'
+import { validProduct, validProductUser, authenticated } from '../filters'
 
 const router = express.Router()
 
@@ -37,6 +38,7 @@ let upload = multer({ storage: storage, fileFilter: fileFilter })
 router.post('/', authenticated, list)
 router.post('/add', upload.any(), authenticated, add)
 router.post('/:product_id/comment', authenticated, validProduct, comment)
-router.post('/:product_id/edit', upload.any(), authenticated, validProduct, edit)
+router.post('/:product_id/edit', upload.any(), authenticated, validProductUser, edit)
+router.post('/:product_id/remove', authenticated, validProductUser, remove)
 
 export default router

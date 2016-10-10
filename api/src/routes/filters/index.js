@@ -48,3 +48,29 @@ export const validProduct = (req, res, next) => {
     })
   })
 }
+
+export const validProductUser = (req, res, next) => {
+  let product_id = req.body.product_id || req.params.product_id
+  let options = {
+    _id: product_id,
+    user: req.user.id
+  }
+  return Product.findOne(options).then((product) => {
+    if (product) {
+      req.product = product
+      next()
+    } else {
+      return res.send({
+        status: false,
+        message: 'Produto não encontrado',
+        product: product
+      })
+    }
+  }, (error) => {
+    return res.send({
+      status: false,
+      message: 'Produto não encontrado',
+      error: error
+    })
+  })
+}

@@ -12,5 +12,21 @@ export default {
     } catch (e) {
       console.log(e)
     }
+  },
+  removeDirectory: function(product) {
+    if (product.images) {
+      let path = product.images[0].directory
+      if (fs.existsSync(path)) {
+        fs.readdirSync(path).forEach(function(file,index) {
+          var cur_path = `${path}/${file}`
+          if (fs.lstatSync(cur_path).isDirectory()) {
+            deleteFolderRecursive(cur_path)
+          } else {
+            fs.unlinkSync(cur_path)
+          }
+        })
+        fs.rmdirSync(path)
+      }
+    }
   }
 }
