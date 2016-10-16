@@ -4,7 +4,7 @@ import { List, DataGrid } from '../base/components'
 class ListContainer extends Component {
   render() {
     return (
-      <List>
+      <List className="list">
         <DataGrid />
       </List>
     )

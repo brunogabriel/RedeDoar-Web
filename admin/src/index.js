@@ -9,14 +9,15 @@ import { Provider } from 'react-intl-redux'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 
 // containers
-import { MainContainer as ProductCategoriesContainer } from './product_categories'
 import { MainContainer as LoginContainer } from './auth'
+import { MainContainer as AppContainer } from './base'
+import { DashboardContainer } from './base'
 
 // routes
 import { routes as productCategoriesRoutes } from './product_categories'
 
 // require('../scss/app.scss')
-import '../scss/app.scss'
+import '../scss/app.sass'
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.auth.user,
@@ -38,18 +39,14 @@ const UserIsAuthenticated = UserAuthWrapper({
 //   <Route path="*" component={containers.NoMatchContainer} />
 // </Route>
 
-const AppContainer = ({ children }) => {
-  return (
-    <div>
-      <h1>AppContainer</h1>
-      {children}
-    </div>
-  )
-}
-
-const DashboardContainer = () => {
-  return <h1>DashboardContainer</h1>
-}
+// const AppContainer = ({ children }) => {
+//   return (
+//     <div>
+//       <h1>AppContainer</h1>
+//       {children}
+//     </div>
+//   )
+// }
 
 ReactDOM.render((
   <Provider store={store}>

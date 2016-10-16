@@ -1,0 +1,168 @@
+$purple: #6a6388
+$dark-purple: #504872
+$light-purple: #b0acbf
+
+$brand-primary: $purple
+$brand-danger: #e53935
+$brand-info: #4fc3f7
+$brand-default: #78909c
+$brand-warning: #ff9800
+$border-radius-large: 2px
+$border-radius-base: 2px
+$border-radius-small: 2px
+
+// Core variables and mixins
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/variables"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins"
+
+// Reset and dependencies
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/normalize"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/print"
+// @import "bootstrap/glyphicons"
+
+// Core CSS
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/scaffolding"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/type"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/code"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/grid"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/tables"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/forms"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/buttons"
+
+// Components
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/component-animations"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/dropdowns"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/button-groups"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/input-groups"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/navs"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/navbar"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/breadcrumbs"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/pagination"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/pager"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/labels"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/badges"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/jumbotron"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/thumbnails"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/alerts"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/progress-bars"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/media"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/list-group"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/panels"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/responsive-embed"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/wells"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/close"
+
+// Components w/ JavaScript
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap/modals"
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap/tooltip"
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap/popovers"
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap/carousel"
+
+// // Utility classes
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/utilities"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities"
+
+.navbar
+  box-shadow: rgba(black, .3) 0 0 2px
+  background: white
+  .navbar-brand
+    font-weight: 500
+  .navbar-toggle
+    border: 0
+    &:hover, 
+    &:focus
+      background: transparent
+    .icon-bar
+      height: 1px
+      border-radius: 0
+      background: $purple
+      + .icon-bar
+        margin-top: 5px
+  .nav 
+    > li 
+      > a
+        &:hover
+          text-decoration: underline
+        &:hover,
+        &:focus
+          background: white
+  .nav 
+    .open 
+      > a 
+        background: white
+        &:hover,
+        &:active,
+        a:focus,
+        a:active:focus
+          background: white
+
+.navbar-fixed-top
+  border: 0
+
+.navbar-inverse
+  background: $purple
+  border: 0
+  .navbar-nav 
+    > li 
+      > a
+        color: white
+  .navbar-brand
+    color: white
+    &:hover
+      color: white
+  .navbar-toggle
+    border: 0
+    &:hover, 
+    &:focus
+      background: transparent
+    .icon-bar
+      height: 4px
+      border-radius: 0
+      + .icon-bar
+        margin-top: 2px
+  .navbar-collapse
+    border-color: $purple
+    box-shadow: none
+  .navbar-nav
+    .open
+      .dropdown-menu
+        > li
+          > a
+            color: white
+    > .open
+      > a,
+      > a:hover,
+      > a:focus
+        background: $dark-purple
+    > .active
+      > a,
+      > a:hover,
+      > a:focus
+        background: $dark-purple
+
+.dropdown-menu
+  background: white
+  box-shadow: none
+  border: 0
+  border-radius: 0
+  @media #{$large-up}
+    border: 1px solid #ddd
+    border-top: 0
+  > li
+    > a
+      color: $purple
+      &:hover,
+      &:focus
+        background: white
+        color: $purple
+        text-decoration: underline
+
+.form-control:focus
+  box-shadow: 0 1px 1px rgba(black, .075) inset, 0 0 0 2px rgba($brand-primary, .3)
+  border-color: $purple
+
+.btn 
+  border-width: 0
+  box-shadow: rgba(black, 0.1) 0 -2px 0 inset, rgba(0, 0, 0, 0.12) 0 -10px 10px inset
+  font-weight: 500
+  text-shadow: rgba(black, 0.2) 1px 1px

@@ -1,0 +1,4 @@
+=child-delay($delay: 70ms, $counter: 100)
+  @for $i from 0 through $counter
+    &:nth-child(#{$i})
+      animation-delay: ($i - 1) * $delay

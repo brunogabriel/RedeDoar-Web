@@ -10,6 +10,7 @@
     "forever-monitor": "^1.7.0",
     "intl": "^1.2.5",
     "json-loader": "^0.5.4",
+    "lodash": "^4.16.4",
     "moment": "^2.15.1",
     "mongoose": "^4.5.10",
     "quill": "^1.0.6",

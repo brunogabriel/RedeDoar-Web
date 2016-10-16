@@ -1,0 +1,74 @@
+body
+  padding-top: 50px
+  font-family: "Hind Siliguri", Helvetica, Arial, sans-serif
+
+.container-fluid
+  max-width: 1280px
+  margin: 0 auto
+
+header.main-header
+  margin: 0 0 40px 0
+  padding: 20px 0
+  // color: $brand-primary
+  border-bottom: 1px solid #e7e7e7
+  background: #eceff1
+  text-align: center
+  h1 
+    margin: 0
+    position: relative
+    font-weight: 600
+    font-size: 24px
+    // &::before
+    //   content: "\2022 "
+    //   // position: absolute 
+    //   // top: 1px
+    //   // left: -30px
+    //   color: #ccc
+    //   display: inline-block
+    //   margin-right: 10px
+
+.actions-box
+  margin-bottom: 20px
+  text-align: right
+
+@for $i from 1 through 6
+  h#{$i}
+    font-weight: 300
+
+.shake-me
+  transform: 
+  animation: shakeMe .4s ease-in-out
+
+.active-locale 
+  color: #bbb
+  pointer-events: none 
+
+label
+  font-weight: normal
+
+.btn:focus,
+.btn:active,
+.btn:active:focus
+  outline: none
+
+.separator-10
+  display: inline-block
+  margin: 0 5px
+
+.table-filters
+  background: #eee 
+  padding: 10px 15px
+  border-radius: 2px
+  margin-bottom: 20px
+
+footer.main-footer
+  text-align: right
+  padding-bottom: 20px
+  p
+    margin: 0
+    color: #999
+    a 
+      font-weight: 500
+
+.sub-title
+  margin: 0 0 20px 0

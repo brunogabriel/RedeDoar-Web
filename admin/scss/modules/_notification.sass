@@ -1,0 +1,33 @@
+.notification
+  transition: all 300ms
+  position: fixed
+  z-index: 1030
+  top: 50px
+  right: 0px
+  width: 100%
+  padding: 10px
+  visibility: hidden
+  transform: translateX(120%)
+  opacity: 0
+  @media (min-width: 769px)
+    padding: 0
+    width: auto
+    top: 70px
+    right: 20px
+  &.notification-show
+    transition-timing-function: $ease-out-back
+    transform: translateX(0%)
+    opacity: 1
+    visibility: visible
+  &.notification-hiding
+    transition: transform 300ms $ease-in-quad, opacity 300ms 100ms $ease-in-quad
+    transform: translateX(120%)
+    opacity: 0
+    visibility: visible
+  &.notification-hidden
+    visibility: hidden
+  .alert
+    cursor: pointer
+    transition: opacity 300ms
+    &:hover
+      opacity: 0.7

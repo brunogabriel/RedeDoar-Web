@@ -4,9 +4,9 @@ import { env } from './'
 export default {
   endpoint: () => {
     const endpoints = {
-      development: 'http://cahere-api.dev.azk.io',
-      staging: 'http://api.cahere.slideworks.cc',
-      production: 'http://api.cahere.com.br'
+      development: 'http://rede-doar-api.dev.azk.io',
+      staging: 'http://rede-doar-api.dev.azk.io',
+      production: 'http://rede-doar-api.dev.azk.io'
     }
     if (env.isProduction()) {
       return endpoints.production

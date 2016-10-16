@@ -6,14 +6,13 @@ module.exports = {
   output: {
     path: __dirname,
     filename: 'bundle.js'
-    // filename: PROD ? 'bundle.min.js' : 'bundle.js'
   },
   module: {
     loaders: [{
       test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
       loader: 'file'
     }, {
-      test: /\.scss$/,
+      test: /\.scss$|\.sass$/,
       loaders: ['style', 'css', 'sass']
     }, {
       test: /\.css$/,

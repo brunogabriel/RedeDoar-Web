@@ -1,0 +1,49 @@
+.company-item
+  +child-delay
+  margin: 0 0 40px 0
+  animation: enterItemScale .3s forwards
+  opacity: 0
+  @media #{$medium-up}
+    margin: 0 0 20px 0
+  .letter-logo
+    margin-bottom: 10px
+  h3
+    margin: 0 0 5px 0
+  p
+    margin: 0 0 5px 0
+    &.company-localization
+      color: #bbb
+    &:last-child
+      margin: 0
+.letter-logo
+  border-radius: 50%
+  background: #eee
+  width: 64px
+  height: 64px
+  margin: 0 auto
+  font-weight: 300
+  font-size: 34px
+  line-height: 2
+  text-align: center
+  display: block
+  color: $purple
+.company-logo
+  max-width: 64px
+.company-view
+  header 
+    text-align: center
+    margin-bottom: 20px
+    .letter-logo
+      width: 128px
+      height: 128px
+      font-size: 64px
+    img 
+      max-width: 128px
+      display: block
+      margin: 0 auto
+    h2
+      font-weight: 600
+  .job-item 
+    p
+      &.job-company
+        display: none
