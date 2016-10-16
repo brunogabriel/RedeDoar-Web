@@ -5,7 +5,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: __dirname,
-    filename: PROD ? 'bundle.min.js' : 'bundle.js'
+    filename: 'bundle.js'
+    // filename: PROD ? 'bundle.min.js' : 'bundle.js'
   },
   module: {
     loaders: [{
@@ -14,6 +15,12 @@ module.exports = {
     }, {
       test: /\.scss$/,
       loaders: ['style', 'css', 'sass']
+    }, {
+      test: /\.css$/,
+      loaders: ['style', 'css']
+    }, {
+      test: /\.json$/,
+      loaders: ['json']
     }, {
       test: /\.js$/,
       loader: 'babel-loader',

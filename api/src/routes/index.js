@@ -7,12 +7,14 @@ import users from './users'
 import products from './products'
 import product_categories from './product_categories'
 import product_favorites from './product_favorites'
+import admin from './admin'
 
 router.use('/', home)
 router.use('/users', users)
 router.use('/products', products)
 router.use('/product_categories', authenticated, product_categories)
 router.use('/product_favorites', authenticated, product_favorites)
+router.use('/admin', admin)
 router.use(express.static('public'))
 
 router.use((err, req, res, next) => {

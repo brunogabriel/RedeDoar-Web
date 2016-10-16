@@ -3,7 +3,7 @@ $border-radius-base: 2px;
 $border-radius-large: 2px;
 $border-radius-small: 2px;
 
-@import "~bootswatch/lumen/variables";
+// @import "~bootswatch/lumen/variables";
 
 // // Core variables and mixins
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/variables";
@@ -19,8 +19,8 @@ $border-radius-small: 2px;
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/type";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/code";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/grid";
-// @import "~bootstrap-sass/assets/stylesheets/bootstrap/tables";
-// @import "~bootstrap-sass/assets/stylesheets/bootstrap/forms";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/tables";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/forms";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/buttons";
 
 // // Components
@@ -56,4 +56,4 @@ $border-radius-small: 2px;
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/utilities";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 
-@import "~bootswatch/lumen/bootswatch";
+// @import "~bootswatch/lumen/bootswatch";

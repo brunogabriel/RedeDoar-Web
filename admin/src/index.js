@@ -1,24 +1,64 @@
-import React, { Component } from 'react'
-import ReactDom from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'
+// import { Router, Route, browserHistory, IndexRoute } from 'react-router-redux'
 
-require('../scss/app.scss')
+import store from './store'
+// import * as containers from './containers'
+import { Provider } from 'react-intl-redux'
+import { UserAuthWrapper } from 'redux-auth-wrapper'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-12">
-            <h1>RedeDoar Admin</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae eaque sint, saepe autem harum officia praesentium, alias reprehenderit accusantium, totam atque, eos. Ab rerum eligendi voluptatibus suscipit magni, explicabo nihil.</p>
-            <p>
-              <a href="#" className="btn btn-primary">Entrar</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    )
-  }
+// containers
+import { MainContainer as ProductCategoriesContainer } from './product_categories'
+import { MainContainer as LoginContainer } from './auth'
+
+// routes
+import { routes as productCategoriesRoutes } from './product_categories'
+
+// require('../scss/app.scss')
+import '../scss/app.scss'
+
+const UserIsAuthenticated = UserAuthWrapper({
+  authSelector: state => state.auth.user,
+  wrapperDisplayName: 'UserIsAuthenticated'
+})
+
+// <Route path="/login" component={containers.LoginFormContainer} />
+// <Route path="/" component={UserIsAuthenticated(containers.AppContainer)}>
+//   <IndexRoute component={containers.DashboardContainer} />
+//   <Route path="/dashboard" component={containers.DashboardContainer} />
+//   <Route path="/companies" component={containers.CompaniesContainer}>
+//     <IndexRoute component={containers.CompaniesTableContainer} />
+//     <Route path="/companies/:id" component={containers.CompaniesViewContainer} />
+//   </Route>
+//   <Route path="/jobs" component={containers.JobsContainer}>
+//     <IndexRoute component={containers.JobsTableContainer} />
+//     <Route path="/jobs/:id" component={containers.JobsViewContainer} />
+//   </Route>
+//   <Route path="*" component={containers.NoMatchContainer} />
+// </Route>
+
+const AppContainer = ({ children }) => {
+  return (
+    <div>
+      <h1>AppContainer</h1>
+      {children}
+    </div>
+  )
 }
 
-ReactDom.render(<App />, document.getElementById('app'))
+const DashboardContainer = () => {
+  return <h1>DashboardContainer</h1>
+}
+
+ReactDOM.render((
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/login" component={LoginContainer} />
+      <Route path="/" component={AppContainer}>
+        <IndexRoute component={DashboardContainer} />
+        {productCategoriesRoutes}
+      </Route>
+    </Router>
+  </Provider>
+), document.getElementById('content'))
