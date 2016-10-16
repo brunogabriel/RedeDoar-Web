@@ -1,4 +1,4 @@
-import config from '../config'
+import { asset } from './'
 
 export default {
   prepareData: function(products) {
@@ -26,6 +26,6 @@ export default {
   },
   getFullPath: function(image, size) {
     let directory = image.directory.replace('public', '')
-    return `${config.staticUrl}${directory}${size}_${image.filename}`
+    return asset.url(`${directory}${size}_${image.filename}`)
   }
 }

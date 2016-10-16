@@ -41,3 +41,4 @@ jspm_packages
 .azk
 api/public/uploads/*
 api/tmp/*
+.env
