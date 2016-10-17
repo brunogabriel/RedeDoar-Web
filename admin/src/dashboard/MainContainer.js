@@ -1,7 +1,7 @@
 import React from 'react'
-import { BaseContainer } from './'
+import { BaseContainer } from '../base'
 
-const DashboardContainer = () => {
+const MainContainer = () => {
   return (
     <BaseContainer title="breadcrumb.dashboard">
       <div className="jumbotron">
@@ -12,4 +12,4 @@ const DashboardContainer = () => {
   )
 }
 
-export default DashboardContainer
+export default MainContainer

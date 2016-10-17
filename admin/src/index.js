@@ -11,12 +11,12 @@ import { UserAuthWrapper } from 'redux-auth-wrapper'
 // containers
 import { MainContainer as LoginContainer } from './auth'
 import { MainContainer as AppContainer } from './base'
-import { DashboardContainer } from './base'
+import { MainContainer as DashboardContainer } from './dashboard'
 
 // routes
 import { routes as productCategoriesRoutes } from './product_categories'
 
-// require('../scss/app.scss')
+// styles
 import '../scss/app.sass'
 
 const UserIsAuthenticated = UserAuthWrapper({

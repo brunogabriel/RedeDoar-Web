@@ -49,7 +49,7 @@ class Nav extends Component {
       'open': this.props.nav.opened_languages
     })
     return (
-      <nav className="navbar navbar-fixed-top">
+      <nav className="navbar navbar-inverse navbar-fixed-top">
         <div className="container-fluid">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" onClick={this.props.onToggleMobileNav}>
@@ -58,7 +58,9 @@ class Nav extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <Link className="navbar-brand" to="/">RedeDoar</Link>
+            <Link className="navbar-brand with-logo" to="/">
+              <img src="/images/logo.png" className="logo" />
+            </Link>
           </div>
           <div id="navbar" className={navbarClassname}>
             <ul className="nav navbar-nav" ref="main_nav">

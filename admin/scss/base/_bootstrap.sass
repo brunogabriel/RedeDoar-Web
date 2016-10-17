@@ -1,5 +1,5 @@
-$purple: #6a6388
-$dark-purple: #504872
+$purple: #6E65E6
+$dark-purple: #4d47a1
 $light-purple: #b0acbf
 
 $brand-primary: $purple
@@ -67,6 +67,10 @@ $border-radius-small: 2px
   background: white
   .navbar-brand
     font-weight: 500
+    &.with-logo
+      padding: 10px 15px
+      .logo 
+        width: 70px
   .navbar-toggle
     border: 0
     &:hover, 
@@ -116,10 +120,7 @@ $border-radius-small: 2px
     &:focus
       background: transparent
     .icon-bar
-      height: 4px
-      border-radius: 0
-      + .icon-bar
-        margin-top: 2px
+      background: white
   .navbar-collapse
     border-color: $purple
     box-shadow: none
@@ -139,6 +140,42 @@ $border-radius-small: 2px
       > a:hover,
       > a:focus
         background: $dark-purple
+  .nav 
+    > li 
+      > a
+        &:hover
+          text-decoration: none
+        &:hover,
+        &:focus
+          background: $dark-purple
+  .nav 
+    .open 
+      > a 
+        background: $dark-purple
+        &:hover,
+        &:active,
+        a:focus,
+        a:active:focus
+          background: $dark-purple
+  .dropdown-menu
+    background: $dark-purple
+    @media #{$large-up}
+      border-color: $dark-purple
+      box-shadow: rgba(black, .4) 0 3px 2px
+    > li
+      &:last-child
+        > a
+          border-bottom: 0
+          padding: 0
+      > a
+        color: $dark-purple
+        padding: 0 0 5px 0
+        margin: 5px 15px
+        border-bottom: 1px solid rgba(black, .1)
+        &:hover,
+        &:focus
+          background: $dark-purple
+          color: white
 
 .dropdown-menu
   background: white
@@ -166,3 +203,14 @@ $border-radius-small: 2px
   box-shadow: rgba(black, 0.1) 0 -2px 0 inset, rgba(0, 0, 0, 0.12) 0 -10px 10px inset
   font-weight: 500
   text-shadow: rgba(black, 0.2) 1px 1px
+  transition: background 200ms, border 200ms
+
+.btn-primary
+  &:hover
+    background: $dark-purple
+    border-color: $dark-purple
+
+.jumbotron
+  background: #eceff1
+
+// https://github.com/brunogabriel/FriendlyDonations-Android/blob/master/FriendlyDonations/app/src/main/res/values/colors.xml

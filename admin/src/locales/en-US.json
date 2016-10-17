@@ -1,0 +1,10 @@
+{
+  "nav.languages": "Languages",
+  "nav.logout": "Logout",
+  "nav.hello": "Hello",
+  "nav.dashboard": "Dashboard",
+  "nav.product_categories": "Product categories",
+  "breadcrumb.dashboard": "Dashboard",
+  "breadcrumb.product_categories": "Product categories",
+  "actions.add": "Add"
+}
