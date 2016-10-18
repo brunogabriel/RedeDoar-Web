@@ -1,7 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { BaseContainer } from '../base'
+import { showNotification } from '../notifications/actions'
 
-const MainContainer = () => {
+const MainContainer = ({ showNotification }) => {
   return (
     <BaseContainer title="breadcrumb.dashboard">
       <div className="jumbotron">
@@ -12,4 +14,12 @@ const MainContainer = () => {
   )
 }
 
-export default MainContainer
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showNotification: (message) => {
+      return dispatch(showNotification(message))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(MainContainer)

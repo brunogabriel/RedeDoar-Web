@@ -1,4 +1,5 @@
 import {
+  NOTIFICATION,
   HIDING_NOTIFICATION,
   HIDDEN_NOTIFICATION,
   TIME_LEFT_NOTIFICATION,
@@ -45,5 +46,13 @@ export const hideTimeOutNotification = (notification) => {
 export const cancelTimeOutNotification = () => {
   return dispatch => {
     dispatch({ type: TIME_LEFT_CANCELLED_NOTIFICATION })
+  }
+}
+
+export const showNotification = (message, message_type = null) => {
+  return {
+    type: NOTIFICATION,
+    message,
+    message_type
   }
 }

@@ -28,10 +28,14 @@ export default class Notification extends Component  {
           <br />
           <small>
             <span className={class_name_time_left}>
-              <i>Fechando em {this.props.time_left} segundos</i>
+              <i>
+                <FormattedMessage id="notifications.closing_in" values={{seconds: this.props.time_left}} />
+              </i>
             </span>
             <span className={class_name_time_left_cancelled}>
-              <i>Clique para fechar</i>
+              <i>
+                <FormattedMessage id="notifications.click_to_close" />
+              </i>
             </span>
           </small>
         </div>
