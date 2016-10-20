@@ -4,15 +4,15 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
-import { toggleMobileNav, toggleDropdownLanguages, setCurrentNavItem } from '../actions/nav'
+import { toggleMobileNav, toggleDropdown, setCurrentNavItem } from '../actions/nav'
 import { changeLanguage } from '../../intl/actions'
 import { logout } from '../../auth/actions'
 import { LanguageItem } from './'
 
 class Nav extends Component {
-  openLanguages(e) {
+  toggleDropdown(name, e) {
     e.preventDefault()
-    this.props.onToggleDropdownLanguages();
+    this.props.onToggleDropdown(name);
   }
   renderNav(item) {
     let current_key = null
@@ -38,15 +38,17 @@ class Nav extends Component {
     e.preventDefault()
     this.props.onChangeLanguage(locale)
   }
+  dropdownClassname(name) {
+    return classNames({
+      'dropdown': true,
+      'open': name == this.props.nav.current_opened_dropdown
+    })
+  }
   render() {
     let navbarClassname = classNames({
       'navbar-collapse': true,
       'collapse': true,
       'in': this.props.nav.opened_nav
-    })
-    let languagesClassname = classNames({
-      'dropdown': true,
-      'open': this.props.nav.opened_languages
     })
     return (
       <nav className="navbar navbar-inverse navbar-fixed-top">
@@ -65,12 +67,16 @@ class Nav extends Component {
           <div id="navbar" className={navbarClassname}>
             <ul className="nav navbar-nav" ref="main_nav">
               {this.props.links.map(item => this.renderNav(item))}
-              <li className={languagesClassname} onClick={this.openLanguages.bind(this)}>
+            </ul>
+            <ul className="nav navbar-nav pull-right">
+              <li className={this.dropdownClassname('user')} onClick={this.toggleDropdown.bind(this, 'user')}>
                 <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" className="dropdown-toggle" href="#">
-                  <FormattedMessage id="nav.languages" />
+                  <FormattedMessage id="nav.hello" />
+                  <span> {this.props.user.firstName}</span>
                   <span className="caret"></span>
                 </a>
                 <ul className="dropdown-menu">
+                  <li><small className="no-link">Trocar idioma</small></li>
                   {this.props.intl.options.map(item => 
                     <LanguageItem
                       key={item.locale}
@@ -79,20 +85,13 @@ class Nav extends Component {
                       onClick={this.onChangeLanguage.bind(this, item.locale)}
                       />
                   )}
+                  <li className="divider"></li>
+                  <li>
+                    <a href="#" onClick={this.props.onLogout.bind(this)}>
+                      <FormattedMessage id="nav.logout" />
+                    </a>
+                  </li>
                 </ul>
-              </li>
-              <li className="">
-                <a href="#" onClick={this.props.onLogout.bind(this)}>
-                  <FormattedMessage id="nav.logout" />
-                </a>
-              </li>
-            </ul>
-            <ul className="nav navbar-nav pull-right">
-              <li>
-                <a href="#">
-                  <FormattedMessage id="nav.hello" />
-                  <span> {this.props.user.firstName}</span>
-                </a>
               </li>
             </ul>
           </div>
@@ -127,8 +126,8 @@ const mapDispatchToProps = (dispatch) => {
     onToggleMobileNav: () => {
       dispatch(toggleMobileNav())
     },
-    onToggleDropdownLanguages: () => {
-      dispatch(toggleDropdownLanguages())
+    onToggleDropdown: (name) => {
+      dispatch(toggleDropdown(name))
     },
     onSetCurrentNavItem: (nav_item) => {
       dispatch(setCurrentNavItem(nav_item))

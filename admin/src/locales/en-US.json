@@ -1,4 +1,8 @@
 {
+  "auth.login": "Enter",
+  "auth.username": "Username",
+  "auth.password": "Password",
+  "actions.enter": "Enter",
   "nav.languages": "Languages",
   "nav.logout": "Logout",
   "nav.hello": "Hello",
@@ -6,5 +10,7 @@
   "nav.product_categories": "Product categories",
   "breadcrumb.dashboard": "Dashboard",
   "breadcrumb.product_categories": "Product categories",
-  "actions.add": "Add"
+  "actions.add": "Add",
+  "notifications.closing_in": "Closing in {seconds} seconds",
+  "notifications.click_to_close": "Click to close"
 }

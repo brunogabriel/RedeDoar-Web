@@ -6,14 +6,14 @@ import classNames from 'classnames'
 import { Loader } from '../base/components'
 import { LoginForm, LanguageBox } from './components'
 import { submitLogin, checkSession } from './actions'
-// import { NotificationContainer } from './'
-// import { meta, translate } from '../helpers'
-// import { checkLocaleInQuery } from '../actions/intl'
+import { MainContainer as NotificationContainer } from '../notifications/'
+import { meta, translate } from '../helpers'
+import { checkLocaleInQuery } from '../intl/actions'
 
 class MainContainer extends Component {
   componentDidMount() {
-    // let messages = translate.getMessages(this.props)
-    // meta.setTitle(messages['auth.login'])
+    let messages = translate.getMessages(this.props)
+    meta.setTitle(messages['auth.login'])
     this.props.onCheckLocaleInQuery(this.props.location.query)
     this.props.checkSession();
   }
@@ -23,21 +23,27 @@ class MainContainer extends Component {
       'on': this.props.checking_session
     })
 
-        // <NotificationContainer />
     return(
       <div className="container-fluid">
+        <NotificationContainer />
         <div className="row">
-          <div className="col-sm-4 col-sm-offset-4">
+          <div className="col-md-8 col-md-offset-2">
             <div className={container_loader_class}>
               <div className="loader-box">
                 <Loader />
               </div>
-              <div className="main-content-loader">
-                <h2>
-                  <FormattedMessage id="auth.login" />
-                </h2>
-                <LoginForm {...this.props} />
-                <LanguageBox />
+              <div className="login-container main-content-loader">
+                <div className="row">
+                  <div className="col-sm-8">
+                    <img src="/images/logo-black.png" className="logo-black" />
+                  </div>
+                  <div className="col-sm-4">
+                    <LoginForm {...this.props} />
+                  </div>
+                  <div className="col-sm-12">
+                    <LanguageBox />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -59,9 +65,9 @@ const mapDispatchToProps = (dispatch) => {
     onSubmit: (data) => {
       return dispatch(submitLogin(data))
     },
-    // onCheckLocaleInQuery: (query) => {
-    //   dispatch(checkLocaleInQuery(query))
-    // },
+    onCheckLocaleInQuery: (query) => {
+      dispatch(checkLocaleInQuery(query))
+    },
     checkSession: () => {
       dispatch(checkSession())
     }

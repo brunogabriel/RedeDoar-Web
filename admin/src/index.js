@@ -52,7 +52,7 @@ ReactDOM.render((
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/login" component={LoginContainer} />
-      <Route path="/" component={AppContainer}>
+      <Route path="/" component={UserIsAuthenticated(AppContainer)}>
         <IndexRoute component={DashboardContainer} />
         {productCategoriesRoutes}
       </Route>

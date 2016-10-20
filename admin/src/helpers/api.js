@@ -4,9 +4,9 @@ import { env } from './'
 export default {
   endpoint: () => {
     const endpoints = {
-      development: 'http://rede-doar-api.dev.azk.io',
-      staging: 'http://rede-doar-api.dev.azk.io',
-      production: 'http://rede-doar-api.dev.azk.io'
+      development: 'http://rede-doar-api.dev.azk.io/admin',
+      staging: 'http://rede-doar-api.dev.azk.io/admin',
+      production: 'http://rede-doar-api.dev.azk.io/admin'
     }
     if (env.isProduction()) {
       return endpoints.production

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { Button, LanguageItem } from '../../base/components'
-import { changeLanguage } from '../actions'
+import { changeLanguage } from '../../intl/actions'
 import classNames from 'classnames'
 
 class LanguageBox extends Component {

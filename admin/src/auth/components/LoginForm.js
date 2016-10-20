@@ -15,7 +15,6 @@ class LoginForm extends Component {
     const btn_class = classNames({
       'btn': true,
       'btn-primary': true,
-      'btn-lg': true,
       'btn-block': true,
       'disabled': this.props.sending
     })

@@ -1,4 +1,10 @@
 {
+  "auth.login": "Entrar",
+  "auth.username": "Nome de usuário",
+  "auth.password": "Senha",
+  "auth.error_login": "Login inválido",
+  "auth.sending_login": "Enviando...",
+  "actions.enter": "Entrar",
   "nav.languages": "Idiomas",
   "nav.logout": "Sair",
   "nav.hello": "Olá",

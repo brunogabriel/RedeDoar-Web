@@ -33,7 +33,7 @@ const errorLogin = () => {
   return {
     type: ERROR_LOGIN,
     message: 'auth.error_login',
-    message_type: 'error'
+    message_type: 'danger'
   }
 }
 

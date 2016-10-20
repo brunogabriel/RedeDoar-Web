@@ -10,6 +10,8 @@ $brand-warning: #ff9800
 $border-radius-large: 2px
 $border-radius-base: 2px
 $border-radius-small: 2px
+$font-size-base: 16px
+$font-family-sans-serif: "Source Sans Pro", -apple-system, Helvetica, Arial, sans-serif
 
 // Core variables and mixins
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/variables"
@@ -163,19 +165,16 @@ $border-radius-small: 2px
       border-color: $dark-purple
       box-shadow: rgba(black, .4) 0 3px 2px
     > li
-      &:last-child
-        > a
-          border-bottom: 0
-          padding: 0
       > a
         color: $dark-purple
-        padding: 0 0 5px 0
-        margin: 5px 15px
-        border-bottom: 1px solid rgba(black, .1)
         &:hover,
         &:focus
           background: $dark-purple
           color: white
+    .divider
+      background-color: rgba(black, .1)
+    .no-link
+      color: white
 
 .dropdown-menu
   background: white
@@ -193,10 +192,19 @@ $border-radius-small: 2px
         background: white
         color: $purple
         text-decoration: underline
+  .no-link
+    padding: 3px 20px
+    display: block
+  small
+    font-size: 10px
+    text-transform: uppercase
 
-.form-control:focus
-  box-shadow: 0 1px 1px rgba(black, .075) inset, 0 0 0 2px rgba($brand-primary, .3)
-  border-color: $purple
+
+.form-control
+  box-shadow: none
+  &:focus
+    box-shadow: 0 1px 1px rgba(black, .075) inset, 0 0 0 2px rgba($brand-primary, .3)
+    border-color: $purple
 
 .btn 
   border-width: 0
@@ -205,6 +213,9 @@ $border-radius-small: 2px
   text-shadow: rgba(black, 0.2) 1px 1px
   transition: background 200ms, border 200ms
 
+.btn-default
+  text-shadow: none
+
 .btn-primary
   &:hover
     background: $dark-purple
@@ -212,5 +223,8 @@ $border-radius-small: 2px
 
 .jumbotron
   background: #eceff1
+
+.alert
+  border: 0
 
 // https://github.com/brunogabriel/FriendlyDonations-Android/blob/master/FriendlyDonations/app/src/main/res/values/colors.xml

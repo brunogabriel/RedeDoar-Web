@@ -7,7 +7,7 @@ class ListContainer extends Component {
     return (
       <List className="list">
         <div className="actions-box">
-          <Button primary>
+          <Button success>
             <FormattedMessage id="actions.add" />
           </Button>
         </div>

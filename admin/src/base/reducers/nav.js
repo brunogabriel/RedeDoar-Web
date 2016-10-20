@@ -1,13 +1,14 @@
 import {
+  TOGGLE_DROPDOWN,
   TOGGLE_MOBILE_NAV,
-  TOGGLE_DROPDOWN_LANGUAGES,
   SET_CURRENT_LINK
 } from '../constants'
 
 let initialState = {
   opened_nav: false,
   opened_languages: false,
-  current_nav_item: null
+  current_nav_item: null,
+  current_opened_dropdown: null,
 }
 
 const nav = (state = initialState, action) => {
@@ -17,9 +18,13 @@ const nav = (state = initialState, action) => {
         opened_nav: !state.opened_nav
       })
 
-    case TOGGLE_DROPDOWN_LANGUAGES:
+    case TOGGLE_DROPDOWN:
+      let current_opened_dropdown = action.name
+      if (state.current_opened_dropdown == current_opened_dropdown) {
+        current_opened_dropdown = null
+      }
       return Object.assign({}, state, {
-        opened_languages: !state.opened_languages
+        current_opened_dropdown: current_opened_dropdown
       })
 
     case SET_CURRENT_LINK:

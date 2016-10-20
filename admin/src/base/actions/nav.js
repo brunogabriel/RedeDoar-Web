@@ -1,6 +1,6 @@
 import {
+  TOGGLE_DROPDOWN,
   TOGGLE_MOBILE_NAV,
-  TOGGLE_DROPDOWN_LANGUAGES,
   SET_CURRENT_LINK
 } from '../constants'
 
@@ -10,9 +10,9 @@ export const toggleMobileNav = () => {
   }
 }
 
-export const toggleDropdownLanguages = () => {
+export const toggleDropdown = (name) => {
   return dispatch => {
-    dispatch({ type: TOGGLE_DROPDOWN_LANGUAGES })
+    dispatch({ type: TOGGLE_DROPDOWN, name })
   }
 }
 
