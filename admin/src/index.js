@@ -54,6 +54,7 @@ ReactDOM.render((
       <Route path="/login" component={LoginContainer} />
       <Route path="/" component={UserIsAuthenticated(AppContainer)}>
         <IndexRoute component={DashboardContainer} />
+        <Route path="/dashboard" component={DashboardContainer} />
         {productCategoriesRoutes}
       </Route>
     </Router>

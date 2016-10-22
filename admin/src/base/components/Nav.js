@@ -72,11 +72,15 @@ class Nav extends Component {
               <li className={this.dropdownClassname('user')} onClick={this.toggleDropdown.bind(this, 'user')}>
                 <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" className="dropdown-toggle" href="#">
                   <FormattedMessage id="nav.hello" />
-                  <span> {this.props.user.firstName}</span>
+                  <span> {this.props.user.name}</span>
                   <span className="caret"></span>
                 </a>
                 <ul className="dropdown-menu">
-                  <li><small className="no-link">Trocar idioma</small></li>
+                  <li>
+                    <small className="no-link">
+                      <FormattedMessage id="nav.change_language" />
+                    </small>
+                  </li>
                   {this.props.intl.options.map(item => 
                     <LanguageItem
                       key={item.locale}

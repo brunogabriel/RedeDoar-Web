@@ -54,10 +54,10 @@ export function submitLogin({ username, password }) {
       .send({ email: username, password: password })
       .end((err, res) => {
         if (!err) {
-          if (res.body.result == 'success') {
-            cookie.save('user_token', res.body.data.token, { path: '/' });
+          if (res.body.status) {
+            cookie.save('user_token', res.body.data.token, { path: '/' })
             dispatch(successLogin(res.body.data))
-            dispatch(push('/dashboard'))
+            dispatch(push('/'))
           } else {
             dispatch(errorLogin())
           }
@@ -85,8 +85,8 @@ export function checkSession() {
           .query({ token: token })
           .end((err, res) => {
             if (!err) {
-              if (res.body.result == 'success') {
-                const redirect = url_parser.query('redirect') || '/dashboard'
+              if (res.body.status) {
+                const redirect = url_parser.query('redirect') || '/'
                 dispatch(successLogin(res.body.data))
                 dispatch(push(redirect))
               }

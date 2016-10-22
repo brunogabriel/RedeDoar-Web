@@ -64,3 +64,151 @@
     transform: scale(1)
     opacity: 1
     pointer-events: initial
+
+.bals-spinner
+  position: relative
+  width: 45px
+  height: 45px
+  margin: 0 auto
+  background: #333
+  border-radius: 23px
+  animation: rotateMe 800ms infinite linear
+  &.purple
+    background: $purple
+  &.red
+    background: #f44336
+  &.blue-grey
+    background: #90a4ae
+  span
+    position: absolute
+    width: 10px
+    height: 10px
+    border-radius: 5px
+    background: white
+    &:nth-child(1)
+      top: 10px
+      left: 10px
+    &:nth-child(2)
+      top: 25px
+      left: 10px
+    &:nth-child(3)
+      top: 25px
+      left: 25px
+    &:nth-child(4)
+      top: 10px
+      left: 25px
+
+.bals-spinner2
+  position: relative
+  width: 30px
+  height: 30px
+  margin: 0 auto
+  transform: rotate(45deg)
+  background: #eee
+  border-radius: 15px
+  box-shadow: #eee 0 0 0 15px
+  &.purple
+    span
+      background: $purple
+  &.red
+    span
+      background: #f44336
+  &.blue-grey
+    span
+      background: #90a4ae
+  span
+    position: absolute
+    width: 10px
+    height: 10px
+    border-radius: 5px
+    background: #333
+    &:nth-child(1)
+      top: 0px
+      left: 0px
+      animation: moveBall1 1500ms infinite $ease-in-out-sine
+    &:nth-child(2)
+      top: 20px
+      left: 0px
+      animation: moveBall2 1500ms infinite $ease-in-out-sine
+    &:nth-child(3)
+      top: 20px
+      left: 20px
+      animation: moveBall3 1500ms infinite $ease-in-out-sine
+    &:nth-child(4)
+      top: 0px
+      left: 20px
+      animation: moveBall4 1500ms infinite $ease-in-out-sine
+
+@keyframes moveBall1
+  0%
+    top: 0px
+    left: 0px
+  25%
+    top: 20px
+    left: 0px
+  50%
+    top: 20px
+    left: 20px
+  75%
+    top: 0px
+    left: 20px
+  100%
+    top: 0px
+    left: 0px
+
+@keyframes moveBall2
+  0%
+    top: 20px
+    left: 0px
+  25%
+    top: 20px
+    left: 20px
+  50%
+    top: 0px
+    left: 20px
+  75%
+    top: 0px
+    left: 0px
+  100%
+    top: 20px
+    left: 0px
+
+@keyframes moveBall3
+  0%
+    top: 0px
+    left: 20px
+  25%
+    top: 0px
+    left: 0px
+  50%
+    top: 20px
+    left: 0px
+  75%
+    top: 20px
+    left: 20px
+  100%
+    top: 0px
+    left: 20px
+
+@keyframes moveBall4
+  0%
+    top: 20px
+    left: 20px
+  25%
+    top: 0px
+    left: 20px
+  50%
+    top: 0px
+    left: 0px
+  75%
+    top: 20px
+    left: 0px
+  100%
+    top: 20px
+    left: 20px
+
+@keyframes rotateMe
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
