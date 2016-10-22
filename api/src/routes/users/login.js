@@ -9,11 +9,7 @@ export default (req, res, next) => {
       access_token: access_token,
       fields: config.facebook.fields
     }
-    console.log(parameters);
     FB.api('/me/', 'get', parameters, (result) => {
-      console.log("---");
-      console.log(result);
-      console.log("---");
       if (result.error) {
         let error = {
           cause: result.error.message,

@@ -1,13 +1,24 @@
-// import { AdminUser } from '../../models'
+import { AdminUser } from '../../../models'
 
 export default (req, res, next) => {
-  res.send({
-    status: true,
-    message: 'Login efetuado com sucesso!',
-    data: {
-      id: 1,
-      name: 'Admin',
-      token: '123'
+  let options = {
+    username: req.body.username,
+    password: req.body.password
+  }
+  return AdminUser.authUser(options).then((admin_user) => {
+    if (admin_user) {
+      admin_user.generateToken().then((admin_user) => {
+        res.send({
+          status: true,
+          message: 'Login efetuado com sucesso!',
+          data: admin_user
+        })
+      })
+    } else {
+      res.send({
+        status: false,
+        message: 'Usuário ou senha inválidos'
+      })
     }
   })
 }

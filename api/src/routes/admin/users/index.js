@@ -5,6 +5,6 @@ import login from './login'
 import profile from './profile'
 
 router.post('/login', login)
-router.get('/profile', profile)
+router.post('/profile', profile)
 
 export default router

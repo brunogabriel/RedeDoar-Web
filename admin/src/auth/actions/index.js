@@ -29,6 +29,13 @@ const successLogin = (user) => {
   }
 }
 
+const successToken = (user) => {
+  return {
+    type: USER_LOGGED_IN,
+    user: user
+  }
+}
+
 const errorLogin = () => {
   return {
     type: ERROR_LOGIN,
@@ -51,7 +58,7 @@ export function submitLogin({ username, password }) {
       .post(api.url('/users/login'))
       .set('Accept', 'application/json')
       .type('form')
-      .send({ email: username, password: password })
+      .send({ username: username, password: password })
       .end((err, res) => {
         if (!err) {
           if (res.body.status) {
@@ -79,15 +86,15 @@ export function checkSession() {
       if (token) {
         dispatch({ type: CHECKING_SESSION })
         request
-          .get(api.url('/users/profile'))
+          .post(api.url('/users/profile'))
           .set('Accept', 'application/json')
           .type('form')
-          .query({ token: token })
+          .send({ token: token })
           .end((err, res) => {
             if (!err) {
               if (res.body.status) {
                 const redirect = url_parser.query('redirect') || '/'
-                dispatch(successLogin(res.body.data))
+                dispatch(successToken(res.body.data))
                 dispatch(push(redirect))
               }
             } else {

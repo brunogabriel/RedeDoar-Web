@@ -1,18 +1,8 @@
 import express from 'express'
-import mongoose from 'mongoose'
-import Promise from 'bluebird'
 import bodyParser from 'body-parser'
-import routes from './routes'
 import cors from 'cors'
-
-mongoose.Promise = Promise
-mongoose.connect(process.env.MONGODB_URI).then(() => {
-  if (process.env.DROP_DATABASE == true) {
-    mongoose.connection.db.dropDatabase(() => {
-      console.log('- Drop database')
-    })
-  }
-})
+import database from './database'
+import routes from './routes'
 
 let app = express()
 
