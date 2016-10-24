@@ -1,5 +1,6 @@
 import { User } from '../../models'
 import { Product } from '../../models'
+import { AdminUser } from '../../models'
 
 export const accessTokenRequired = (req, res, next) => {
   if (!req.query.token && !req.body.token) {
@@ -70,6 +71,34 @@ export const validProductUser = (req, res, next) => {
     return res.send({
       status: false,
       message: 'Produto não encontrado',
+      error: error
+    })
+  })
+}
+
+export const adminAuthenticated = (req, res, next) => {
+  if (!req.query.token && !req.body.token) {
+    return res.send({
+      status: false,
+      message: 'Token inválido'
+    })
+  }
+  const token = req.query.token || req.body.token
+  const options = { token: token }
+  return AdminUser.findOne(options).then((admin_user) => {
+    if (admin_user) {
+      req.admin_user = admin_user
+      next()
+    } else {
+      return res.send({
+        status: false,
+        message: 'Usuário não encontrado'
+      })
+    }
+  }, (error) => {
+    return res.send({
+      status: false,
+      message: 'Erro ao buscar usuário',
       error: error
     })
   })

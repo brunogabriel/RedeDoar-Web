@@ -1,13 +1,11 @@
 import express from 'express'
 const router = express.Router()
 
+import { adminAuthenticated } from '../filters'
 import users from './users'
+import product_categories from './product_categories'
 
-// router.all('/*', adminAuthenticated)
 router.use('/users', users)
-router.get('/product_categories', (req, res, next) => {
-  res.set('Content-Type', 'application/json')
-  res.send({ data: [], total: 0 })
-})
+router.use('/product_categories', adminAuthenticated, product_categories)
 
 export default router
