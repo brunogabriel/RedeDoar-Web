@@ -11,7 +11,7 @@ export default (req, res, next) => {
       message: 'Produto alterado com sucesso'
     }
 
-    if (images) {
+    if (images.length > 0) {
       for (let i in images) {
         if (product.images[i]) {
           productImage.remove(product.images[i])

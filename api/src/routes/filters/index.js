@@ -1,5 +1,5 @@
 import { User } from '../../models'
-import { Product } from '../../models'
+import { Product, ProductCategory } from '../../models'
 import { AdminUser } from '../../models'
 
 export const accessTokenRequired = (req, res, next) => {
@@ -99,6 +99,27 @@ export const adminAuthenticated = (req, res, next) => {
     return res.send({
       status: false,
       message: 'Erro ao buscar usuário',
+      error: error
+    })
+  })
+}
+
+export const validProductCategory = (req, res, next) => {
+  let product_category_id = req.body.product_category_id || req.params.product_category_id
+  return ProductCategory.findById(product_category_id).then((product_category) => {
+    if (product_category) {
+      req.product_category = product_category
+      next()
+    } else {
+      return res.send({
+        status: false,
+        message: 'Categoria não encontrada'
+      })
+    }
+  }, (error) => {
+    return res.send({
+      status: false,
+      message: 'Categoria não encontrada',
       error: error
     })
   })

@@ -96,6 +96,8 @@ export function checkSession() {
                 const redirect = url_parser.query('redirect') || '/'
                 dispatch(successToken(res.body.data))
                 dispatch(push(redirect))
+              } else {
+                dispatch({ type: CHECKED_SESSION })
               }
             } else {
               dispatch({ type: CHECKED_SESSION })
