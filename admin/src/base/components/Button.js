@@ -15,7 +15,8 @@ class Button extends Component {
       'btn-xs': this.props.xsmall,
       'btn-sm': this.props.small,
       'btn-lg': this.props.large,
-      'btn-block': this.props.block
+      'btn-block': this.props.block,
+      'btn-icon': this.props.icon
     })
   }
   render() {
@@ -43,7 +44,8 @@ Button.propTypes = {
   xsmall: PropTypes.bool,
   small: PropTypes.bool,
   large: PropTypes.bool,
-  block: PropTypes.bool
+  block: PropTypes.bool,
+  icon: PropTypes.bool
 }
 
 export default Button
