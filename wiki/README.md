@@ -27,6 +27,13 @@ Dentro do item ``caminho``, dê o comando source/bin/activate, seu terminal fica
 (sphinx-fridon) brunogabriel@Brunos-MacBook-Air:~/Documents/github$
 ```
 
+## Erros de encoding
+
+Caso você tenha algum erro, verifique o encoding, se o error for relacionado ao utf-8, execute os comandos:
+  
+  - export LC_ALL=en_US.UTF-8
+  - export LANG=en_US.UTF-8
+
 ## Instalando os requisitos
 
 Com sua virtualenv ativada, dentro da pasta Wiki, encontramos um arquivo chamado requirements.txt, para instalá-lo graças ao pip:
