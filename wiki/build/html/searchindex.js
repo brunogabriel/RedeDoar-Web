@@ -1,0 +1,1 @@
+Search.setIndex({envversion:49,filenames:["index"],objects:{},objnames:{},objtypes:{},terms:{"thiag\u00e3o":0,auha:[],content:0,index:0,modul:0,page:0,search:0,test:0},titles:["Welcome to Wiki Friendly Donations&#8217;s documentation!"],titleterms:{document:0,donat:0,friendli:0,indice:0,tabl:0,welcom:0,wiki:0}})
