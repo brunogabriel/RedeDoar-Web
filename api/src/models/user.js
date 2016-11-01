@@ -22,7 +22,11 @@ const schema = mongoose.Schema({
       type: Date,
       default: Date.now
     }
-  }]
+  }],
+  termsOfUse: {
+    type: Boolean,
+    default: false
+  }
 }, {
   timestamps: true
 })

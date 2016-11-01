@@ -5,6 +5,7 @@ import config from '../../config'
 export default (req, res, next) => {
   if (req.body.token) {
     let access_token = req.body.token
+    let terms_of_use = req.body.terms_of_use
     let parameters = {
       access_token: access_token,
       fields: config.facebook.fields
@@ -40,12 +41,15 @@ export default (req, res, next) => {
               platform: req.body.platform
             }]
           }
+          if (terms_of_use !== undefined) {
+            user_data.termsOfUse = terms_of_use
+          }
           if (!user) {
             return User.createAccount(user_data).then((user) => {
               let notifications_count = 101
               return res.send({
                 status: true,
-                new_account: true,
+                new_account: !user.termsOfUse,
                 access_token: access_token,
                 data: user,
                 notifications: notifications_count
@@ -69,7 +73,7 @@ export default (req, res, next) => {
                   let notifications_count = 101
                   return res.send({
                     status: true,
-                    new_account: false,
+                    new_account: !user.termsOfUse,
                     access_token: access_token,
                     data: user,
                     notifications: notifications_count
