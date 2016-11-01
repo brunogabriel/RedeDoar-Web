@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { List, Datagrid, Button, Icon } from '../base/components'
+import { List, Datagrid, Button, Icon, SearchBox } from '../base/components'
 import { FormattedMessage } from 'react-intl'
 import { fetchProductCategories } from './actions'
 
 class ListContainer extends Component {
   componentDidMount() {
     this.props.fetchProductCategories({ page: 1 })
+  }
+  fetchData(page) {
+    let options = { page: page }
+    this.props.fetchProductCategories(options)
+  }
+  onSearch(search) {
+    let options = { page: 1, search: search }
+    this.props.fetchProductCategories(options)
   }
   render() {
     let header = [{
@@ -36,8 +44,17 @@ class ListContainer extends Component {
       button_options: { danger: true, xsmall: true, icon: true }
     }]
     return (
-      <List className="list">
+      <List 
+        className="list"
+        paging={this.props.product_category.list.paging}
+        intl={this.props.intl}
+        fetchData={this.fetchData.bind(this)}
+        >
         <div className="actions-box">
+          <SearchBox
+            intl={this.props.intl}
+            onSearch={this.onSearch.bind(this)}
+            />
           <Button success>
             <FormattedMessage id="actions.add" />
           </Button>
@@ -55,7 +72,8 @@ class ListContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    product_category: state.product_category
+    product_category: state.product_category,
+    intl: state.intl
   }
 }
 

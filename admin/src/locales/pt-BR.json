@@ -16,5 +16,9 @@
   "actions.enter": "Entrar",
   "actions.add": "Adicionar",
   "notifications.closing_in": "Fechando em {seconds} segundos",
-  "notifications.click_to_close": "Clique para fechar"
+  "notifications.click_to_close": "Clique para fechar",
+  "pagination.prev": "Anterior",
+  "pagination.next": "Próxima",
+  "pagination.page": "página",
+  "pagination.pages": "páginas"
 }

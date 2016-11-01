@@ -26,6 +26,10 @@ const schema = mongoose.Schema({
   termsOfUse: {
     type: Boolean,
     default: false
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 }, {
   timestamps: true

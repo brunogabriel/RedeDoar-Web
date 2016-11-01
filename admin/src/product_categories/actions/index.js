@@ -19,14 +19,14 @@ function receiveProductCategories(list) {
   }
 }
 
-export function fetchProductCategories({ page = 1, limit = 10, order = '-id', callback = null, search = null, filter = 'name' }) {
+export function fetchProductCategories({ page = 1, limit = 10, order = '+id', callback = null, search = null, filter = 'name' }) {
   return (dispatch) => {
     if (!callback) {
       dispatch(requestProductCategories({ page: page, search: search }))
     }
     request
       .post(api.url('/product_categories'))
-      .send(api.params({
+      .query(api.params({
         page: page,
         limit: limit,
         order: order,
