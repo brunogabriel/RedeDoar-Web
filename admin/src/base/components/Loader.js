@@ -3,7 +3,7 @@ const { PropTypes } = React;
 
 export default class Loader extends Component {
   getClassName() {
-    return 'bals-spinner ' + this.props.color
+    return 'spinner bals-spinner ' + this.props.color
   }
 
   render() {

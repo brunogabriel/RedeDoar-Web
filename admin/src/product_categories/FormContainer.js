@@ -39,7 +39,6 @@ class FormContainer extends Component {
     this.props.createProductCategory(data)
   }
   onDrop(files) {
-    console.log('Received files: ', files)
     this.props.dropFile(files[0])
   }
   render() {

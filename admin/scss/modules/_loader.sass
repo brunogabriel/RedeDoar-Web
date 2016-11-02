@@ -98,47 +98,6 @@
       top: 10px
       left: 25px
 
-.bals-spinner2
-  position: relative
-  width: 30px
-  height: 30px
-  margin: 0 auto
-  transform: rotate(45deg)
-  background: #eee
-  border-radius: 15px
-  box-shadow: #eee 0 0 0 15px
-  &.purple
-    span
-      background: $purple
-  &.red
-    span
-      background: #f44336
-  &.blue-grey
-    span
-      background: #90a4ae
-  span
-    position: absolute
-    width: 10px
-    height: 10px
-    border-radius: 5px
-    background: #333
-    &:nth-child(1)
-      top: 0px
-      left: 0px
-      animation: moveBall1 1500ms infinite $ease-in-out-sine
-    &:nth-child(2)
-      top: 20px
-      left: 0px
-      animation: moveBall2 1500ms infinite $ease-in-out-sine
-    &:nth-child(3)
-      top: 20px
-      left: 20px
-      animation: moveBall3 1500ms infinite $ease-in-out-sine
-    &:nth-child(4)
-      top: 0px
-      left: 20px
-      animation: moveBall4 1500ms infinite $ease-in-out-sine
-
 @keyframes moveBall1
   0%
     top: 0px

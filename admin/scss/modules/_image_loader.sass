@@ -1,0 +1,24 @@
+.loading-image
+  position: relative
+  display: inline-block
+  min-height: 50px
+  min-width: 50px
+  .spinner-box
+    position: absolute
+    z-index: 1
+    top: 50%
+    left: 50%
+    opacity: 0
+    transform: translate(-50%, -50%) scale(.6)
+  img 
+    transition: all 300ms
+    transform: scale(1)
+    opacity: 1
+    position: relative
+    z-index: 2
+  &.active
+    .spinner-box
+      opacity: 1
+    img 
+      transform: scale(.7)
+      opacity: 0

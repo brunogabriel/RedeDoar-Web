@@ -1,9 +1,12 @@
 import request from 'superagent'
+import { push } from 'react-router-redux'
 import { api, error } from '../../helpers'
 import {
-  RECEIVE_PRODUCT_CATEGORIES,
   REQUEST_PRODUCT_CATEGORIES,
-  DROP_FILE_PRODUCT_CATEGORIES
+  RECEIVE_PRODUCT_CATEGORIES,
+  DROP_FILE_PRODUCT_CATEGORIES,
+  REQUEST_PRODUCT_CATEGORY,
+  RECEIVE_PRODUCT_CATEGORY
 } from '../constants'
 
 function requestProductCategories(options) {
@@ -17,6 +20,19 @@ function receiveProductCategories(list) {
   return {
     type: RECEIVE_PRODUCT_CATEGORIES,
     list
+  }
+}
+
+function requestCreateProductCategory() {
+  return {
+    type: REQUEST_PRODUCT_CATEGORY
+  }
+}
+
+function receiveCreateProductCategory(options) {
+  return {
+    type: RECEIVE_PRODUCT_CATEGORY,
+    ...options
   }
 }
 
@@ -62,7 +78,7 @@ export function dropFile(file) {
 
 export function createProductCategory(data) {
   return (dispatch) => {
-    // dispatch(requestCreateProductCategory())
+    dispatch(requestCreateProductCategory())
     let post_data = api.params({ name: data.name })
     let req = request
       .post(api.url('/product_categories/add'))
@@ -77,10 +93,14 @@ export function createProductCategory(data) {
           error.handleAjax(err, res, dispatch)
         } else {
           if (res.body.status) {
-            // dispatch(receiveCreateProductCategory(res.body))
+            dispatch(push('/product_categories'))
           } else {
-            // alert
+            alert('error')
           }
+          dispatch(receiveCreateProductCategory({
+            message: res.body.message,
+            plain_message: true
+          }))
         }
       })
   }

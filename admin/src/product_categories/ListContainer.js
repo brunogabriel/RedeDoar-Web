@@ -1,9 +1,39 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { List, Datagrid, Button, Icon, SearchBox } from '../base/components'
 import { FormattedMessage } from 'react-intl'
 import { fetchProductCategories } from './actions'
+import { List, Datagrid, Button, Icon, SearchBox, Loader } from '../base/components'
+
+// @todo Deixar mais modular e criar dentro de @base
+class ImageLoader extends Component {
+  onLoadError() {
+    this.timeout = setTimeout(this.tryLoadImage.bind(this), 1000)
+  }
+  tryLoadImage() {
+    this.refs.image.src = this.props.image
+  }
+  onLoadSuccess() {
+    this.refs.box_image.className = 'loading-image'
+  }
+  render() {
+    return (
+      <div ref="box_image" className="loading-image active">
+        <div className="spinner-box">
+          <Loader />
+        </div>
+        <img
+          ref="image"
+          src={this.props.image}
+          className="img-thumbnail"
+          onLoad={this.onLoadSuccess.bind(this)}
+          onError={this.onLoadError.bind(this)}
+          width={50}
+          />
+      </div>
+    )
+  }
+}
 
 class ListContainer extends Component {
   componentDidMount() {
@@ -32,7 +62,7 @@ class ListContainer extends Component {
       field: 'image',
       getValue: (item) => {
         if (item.image && item.image.thumb) {
-          return <img src={item.image.thumb} className="img-thumbnail" width={50} />
+          return <ImageLoader image={item.image.thumb} />
         }
       }
     }]
