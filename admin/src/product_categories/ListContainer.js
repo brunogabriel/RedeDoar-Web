@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import { List, Datagrid, Button, Icon, SearchBox } from '../base/components'
 import { FormattedMessage } from 'react-intl'
 import { fetchProductCategories } from './actions'
@@ -20,6 +21,9 @@ class ListContainer extends Component {
     let header = [{
       label: 'ID',
       field: '_id',
+      getValue: (item) => {
+        return <code>{item._id}</code>
+      }
     }, {
       label: 'Categoria',
       field: 'name',
@@ -35,12 +39,16 @@ class ListContainer extends Component {
     let actions = [{
       id: 1,
       label: <Icon name="pencil" />,
-      link: '/posts/{{id}}/edit',
+      link: function(data) {
+        return `/product_categories/${data._id}/edit`
+      },
       button_options: { primary: true, xsmall: true, icon: true }
     }, {
       id: 2,
       label: <Icon name="trash" />,
-      link: '/posts/{{id}}/remove',
+      link: function(data) {
+        return `/product_categories/${data._id}/remove`
+      },
       button_options: { danger: true, xsmall: true, icon: true }
     }]
     return (
@@ -55,9 +63,11 @@ class ListContainer extends Component {
             intl={this.props.intl}
             onSearch={this.onSearch.bind(this)}
             />
-          <Button success>
-            <FormattedMessage id="actions.add" />
-          </Button>
+          <Link to="/product_categories/new">
+            <Button success>
+              <FormattedMessage id="actions.add" />
+            </Button>
+          </Link>
         </div>
         <Datagrid 
           header={header}

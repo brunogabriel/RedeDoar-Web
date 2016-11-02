@@ -68,7 +68,7 @@ class Nav extends Component {
             <ul className="nav navbar-nav" ref="main_nav">
               {this.props.links.map(item => this.renderNav(item))}
             </ul>
-            <ul className="nav navbar-nav pull-right">
+            <ul className="nav navbar-nav navbar-user">
               <li className={this.dropdownClassname('user')} onClick={this.toggleDropdown.bind(this, 'user')}>
                 <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" className="dropdown-toggle" href="#">
                   <FormattedMessage id="nav.hello" />

@@ -13,12 +13,19 @@
   "nav.change_language": "Trocar idioma",
   "breadcrumb.dashboard": "Dashboard",
   "breadcrumb.product_categories": "Categorias de produtos",
+  "breadcrumb.not_found": "Página não encontrada",
+  "not_found.page_not_found": "Ooops.. parece que não existe essa página",
   "actions.enter": "Entrar",
   "actions.add": "Adicionar",
+  "actions.save": "Salvar",
   "notifications.closing_in": "Fechando em {seconds} segundos",
   "notifications.click_to_close": "Clique para fechar",
   "pagination.prev": "Anterior",
   "pagination.next": "Próxima",
   "pagination.page": "página",
-  "pagination.pages": "páginas"
+  "pagination.pages": "páginas",
+  "product_categories.fields._id": "ID",
+  "product_categories.fields.name": "Nome da categoria",
+  "product_categories.fields.image": "Imagem",
+  "product_categories.drop_file_here": "Solte o arquivo aqui ou clique para selecionar."
 }

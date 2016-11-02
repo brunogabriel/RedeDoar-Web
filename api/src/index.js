@@ -10,8 +10,8 @@ let app = express()
 app.use(compression())
 app.use(cors())
 app.options('*', cors())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json({ limit: '20mb' }))
 app.use('/', routes)
 
 export default app

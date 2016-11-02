@@ -1,5 +1,6 @@
 body
   padding-top: 50px
+  font-weight: 300
 
 .container-fluid
   max-width: 1000px
@@ -14,13 +15,12 @@ header.main-header
   h1
     margin: 0
     position: relative
-    font-weight: 600
+    font-weight: 800
     font-size: 24px
     text-transform: uppercase
 
 .actions-box
   margin-bottom: 20px
-  text-align: right
 
 @for $i from 1 through 6
   h#{$i}
@@ -63,3 +63,15 @@ footer.main-footer
 
 .sub-title
   margin: 0 0 20px 0
+
+.navbar-user
+  @media #{$medium-up}
+    float: right
+
+::-moz-selection
+  background: #FFD85C
+  color: black
+
+::selection
+  background: #FFD85C
+  color: black

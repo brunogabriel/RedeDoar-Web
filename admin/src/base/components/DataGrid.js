@@ -1,11 +1,20 @@
 import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 import { Button } from './'
 
 const ActionItem = ({ data, action }) => {
+  let link = null
+  if (typeof action.link == 'function') {
+    link = action.link(data)
+  } else {
+    link = action.link
+  }
   return (
-    <Button {...action.button_options}>
-      {action.label}
-    </Button>
+    <Link to={link}>
+      <Button {...action.button_options}>
+        {action.label}
+      </Button>
+    </Link>
   )
 }
 
@@ -51,7 +60,11 @@ export default class Datagrid extends Component {
               return (
                 <tr key={item_key}>
                   {this.props.header.map((header) => {
-                    return <td key={`${item_key}-${header.field}`}>{this.getItemValue(item, header)}</td>
+                    return (
+                      <td key={`${item_key}-${header.field}`}>
+                        {this.getItemValue(item, header)}
+                      </td>
+                    )
                   })}
                   <td>
                     <Actions
