@@ -6,6 +6,7 @@ import { uploadUtils } from '../../../helpers'
 import { adminAuthenticated, validProductCategory } from '../../filters'
 import list from './list'
 import add from './add'
+import show from './show'
 import edit from './edit'
 import remove from './remove'
 
@@ -16,6 +17,7 @@ const upload = multer({ storage: storage, fileFilter: uploadUtils.fileFilterImag
 
 router.post('/', adminAuthenticated, list)
 router.post('/add', upload.any(), adminAuthenticated, add)
+router.post('/:product_category_id', adminAuthenticated, validProductCategory, show)
 router.post('/:product_category_id/edit', upload.any(), adminAuthenticated, validProductCategory, edit)
 router.post('/:product_category_id/remove', adminAuthenticated, validProductCategory, remove)
 

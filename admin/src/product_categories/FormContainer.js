@@ -5,8 +5,8 @@ import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 import Dropzone from 'react-dropzone'
 
-import { List, Datagrid, Button, Icon, SearchBox } from '../base/components'
-import { fetchProductCategories, createProductCategory, dropFile } from './actions'
+import { List, Datagrid, Button, Icon, SearchBox, Loader } from '../base/components'
+import { fetchProductCategory, createProductCategory, dropFile } from './actions'
 
 class DropzoneImage extends Component {
   getPreview() {
@@ -28,7 +28,9 @@ class DropzoneImage extends Component {
 
 class FormContainer extends Component {
   componentDidMount() {
-    // this.props.fetchProductCategories({ page: 1 })
+    if (this.props.params.id) {
+      this.props.fetchProductCategory(this.props.params.id)
+    }
   }
   handleSubmit(e) {
     e.preventDefault()
@@ -48,8 +50,15 @@ class FormContainer extends Component {
       'btn-lg': true,
       'disabled': this.props.product_category.sending
     })
+    const box_class_name = classNames({
+      'form-box': true,
+      'fetch': this.props.product_category.sending
+    })
     return (
-      <div>
+      <div className={box_class_name}>
+        <div className="spinner-box">
+          <Loader />
+        </div>
         <form action="#" onSubmit={this.handleSubmit.bind(this)} method="post" className="">
           <div className="form-group">
             <label htmlFor="name">
@@ -89,6 +98,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     createProductCategory: (data) => {
       dispatch(createProductCategory(data))
+    },
+    fetchProductCategory: (id) => {
+      dispatch(fetchProductCategory(id))
     }
   }
 }

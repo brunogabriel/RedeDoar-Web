@@ -9,7 +9,8 @@ import {
 const initialState = {
   list: { data: [], paging: {} },
   sending: false,
-  file: null
+  file: null,
+  data: {}
 }
 
 function reducer(state = initialState, action) {
@@ -32,7 +33,8 @@ function reducer(state = initialState, action) {
     case RECEIVE_PRODUCT_CATEGORY:
       return Object.assign({}, state, {
         sending: false,
-        file: null
+        file: null,
+        data: action.data
       })
 
     default:

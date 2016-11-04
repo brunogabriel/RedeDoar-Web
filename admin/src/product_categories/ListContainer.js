@@ -77,7 +77,7 @@ class ListContainer extends Component {
       id: 2,
       label: <Icon name="trash" />,
       link: function(data) {
-        return `/product_categories/${data._id}/remove`
+        return `/product_categories/${data._id}/delete`
       },
       button_options: { danger: true, xsmall: true, icon: true }
     }]

@@ -1,0 +1,21 @@
+.form-box
+  position: relative
+  form
+    transition: all 300ms
+    position: relative
+    z-index: 2
+  &.fetch
+    form
+      opacity: .3
+      pointer-events: none
+    .spinner-box
+      z-index: 3
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      opacity: 1
+  .spinner-box
+    position: absolute
+    z-index: 1
+    opacity: 0
+    pointer-events: none

@@ -16,6 +16,19 @@ function requestProductCategories(options) {
   }
 }
 
+function requestProductCategory(id) {
+  return {
+    type: REQUEST_PRODUCT_CATEGORY,
+    id
+  }
+}
+
+function requestCreateProductCategory() {
+  return {
+    type: REQUEST_PRODUCT_CATEGORY
+  }
+}
+
 function receiveProductCategories(list) {
   return {
     type: RECEIVE_PRODUCT_CATEGORIES,
@@ -23,9 +36,10 @@ function receiveProductCategories(list) {
   }
 }
 
-function requestCreateProductCategory() {
+function receiveProductCategory(data) {
   return {
-    type: REQUEST_PRODUCT_CATEGORY
+    type: RECEIVE_PRODUCT_CATEGORY,
+    data
   }
 }
 
@@ -101,6 +115,27 @@ export function createProductCategory(data) {
             message: res.body.message,
             plain_message: true
           }))
+        }
+      })
+  }
+}
+
+export function fetchProductCategory(id) {
+  return (dispatch) => {
+    dispatch(requestProductCategory(id))
+    request
+      .post(api.url(`/product_categories/${id}`))
+      .query(api.params())
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        if (err) {
+          error.handleAjax(err, res, dispatch)
+        } else {
+          if (res.body.status) {
+            dispatch(receiveProductCategory(res.body.data))
+          } else {
+            // error
+          }
         }
       })
   }
