@@ -8,6 +8,6 @@ const router = express.Router()
 
 router.post('/', list)
 router.post('/add', validProduct, add)
-router.post('/remove', validProduct, remove)
+router.post('/:id/remove', remove)
 
 export default router
