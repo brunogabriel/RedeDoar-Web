@@ -55,7 +55,7 @@ $font-family-sans-serif: "Roboto", -apple-system, Helvetica, Arial, sans-serif
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/close"
 
 // Components w/ JavaScript
-// @import "~bootstrap-sass/assets/stylesheets/bootstrap/modals"
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/modals"
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap/tooltip"
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap/popovers"
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap/carousel"
@@ -226,5 +226,23 @@ $font-family-sans-serif: "Roboto", -apple-system, Helvetica, Arial, sans-serif
 
 .alert
   border: 0
+
+.modal
+  background: rgba(black, .5)
+  transition: all 200ms
+  display: block
+  pointer-events: none
+  &.in
+    opacity: 1
+    pointer-events: initial
+
+.modal-content
+  box-shadow: none
+  border: 0
+
+.modal-title
+  text-align: center
+  font-size: 28px
+  font-weight: 600
 
 // https://github.com/brunogabriel/FriendlyDonations-Android/blob/master/FriendlyDonations/app/src/main/res/values/colors.xml

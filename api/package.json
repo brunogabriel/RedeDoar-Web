@@ -16,6 +16,7 @@
     "lodash": "^4.16.1",
     "mime-types": "^2.1.12",
     "mongoose": "^4.5.10",
+    "mongoose-paginate": "^5.0.3",
     "multer": "^1.2.0",
     "step": "0.0.6"
   },

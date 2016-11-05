@@ -3,7 +3,7 @@ import { Loader } from './'
 
 export default class ImageLoader extends Component {
   onLoadError() {
-    this.timeout = setTimeout(this.tryLoadImage.bind(this), 1000)
+    this.timeout = setTimeout(this.tryLoadImage.bind(this), 500)
   }
   tryLoadImage() {
     this.refs.image.src = this.props.image
@@ -35,7 +35,7 @@ ImageLoader.defaultProps = {
   size: 50
 }
 
-ImageLoader.defaultProps = {
+ImageLoader.propTypes = {
   image: PropTypes.string,
   size: PropTypes.number,
   className: PropTypes.string

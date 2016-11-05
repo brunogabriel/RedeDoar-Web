@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { FormattedMessage } from 'react-intl'
 import { fetchProductCategories, deleteProductCategory } from './actions'
+import { showDialog, hideDialog } from '../base/actions/dialog'
 import {
-  List, Datagrid, Button, Icon, SearchBox, Loader, ImageLoader
+  List, Datagrid, Button, Icon, SearchBox, Loader, ImageLoader, Dialog
 } from '../base/components'
 
 class ListContainer extends Component {
@@ -55,7 +56,13 @@ class ListContainer extends Component {
       context: this,
       onClick: function(data, e) {
         e.preventDefault()
-        this.props.deleteProductCategory(data._id)
+        this.props.showDialog({
+          onSuccess: () => {
+            this.props.deleteProductCategory(data._id)
+            this.props.hideDialog()
+          },
+          onClose: this.props.hideDialog
+        })
       }
     }]
     return (
@@ -65,6 +72,7 @@ class ListContainer extends Component {
         intl={this.props.intl}
         fetchData={this.fetchData.bind(this)}
         >
+        <Dialog {...this.props.dialog} />
         <div className="actions-box">
           <SearchBox
             intl={this.props.intl}
@@ -90,7 +98,8 @@ class ListContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     product_category: state.product_category,
-    intl: state.intl
+    intl: state.intl,
+    dialog: state.dialog
   }
 }
 
@@ -101,6 +110,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     deleteProductCategory: (id) => {
       dispatch(deleteProductCategory(id))
+    },
+    showDialog: (options) => {
+      dispatch(showDialog(options))
+    },
+    hideDialog: () => {
+      dispatch(hideDialog())
     }
   }
 }
