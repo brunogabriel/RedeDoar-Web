@@ -10,7 +10,7 @@ export default (req, res, next) => {
       status: true,
       message: 'Categoria adicionada com sucesso'
     }
-
+    
     if (images.length > 0) {
       product_category.image = images[0]
       product_category.save((err) => {

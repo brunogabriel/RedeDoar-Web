@@ -140,3 +140,58 @@ export function fetchProductCategory(id) {
       })
   }
 }
+
+export function updateProductCategory(id, data) {
+  return (dispatch) => {
+    dispatch(requestCreateProductCategory())
+    let post_data = api.params({ name: data.name })
+    let req = request
+      .post(api.url(`/product_categories/${id}/edit`))
+    for (let i in post_data) {
+      req.field(i, post_data[i])
+    }
+    if (data.image) req.attach('image', data.image)
+    req
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        if (err) {
+          error.handleAjax(err, res, dispatch)
+        } else {
+          if (res.body.status) {
+            dispatch(push('/product_categories'))
+          } else {
+            alert('error')
+          }
+          dispatch(receiveCreateProductCategory({
+            message: res.body.message,
+            plain_message: true
+          }))
+        }
+      })
+  }
+}
+
+export function deleteProductCategory(id) {
+  return (dispatch) => {
+    dispatch(requestCreateProductCategory())
+    let req = request
+      .post(api.url(`/product_categories/${id}/remove`))
+      .send(api.params())
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        if (err) {
+          error.handleAjax(err, res, dispatch)
+        } else {
+          if (res.body.status) {
+            dispatch(fetchProductCategories({ page: 1 }))
+          } else {
+            alert('error')
+          }
+          dispatch(receiveCreateProductCategory({
+            message: res.body.message,
+            plain_message: true
+          }))
+        }
+      })
+  }
+}

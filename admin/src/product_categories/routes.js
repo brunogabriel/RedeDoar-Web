@@ -9,7 +9,6 @@ const routes =
     <IndexRoute component={ListContainer} />
     <Route path="/product_categories/new" component={FormContainer} />
     <Route path="/product_categories/:id/edit" component={FormContainer} />
-    <Route path="/product_categories/:id/delete" component={FormContainer} />
   </Route>
 
 export default routes

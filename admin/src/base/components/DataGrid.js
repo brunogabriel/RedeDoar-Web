@@ -3,14 +3,21 @@ import { Link } from 'react-router'
 import { Button } from './'
 
 const ActionItem = ({ data, action }) => {
+  let props = {}
   let link = null
   if (typeof action.link == 'function') {
     link = action.link(data)
   } else {
     link = action.link
   }
+  props.to = link
+  if (action.onClick) {
+    let context = this
+    if (action.context) context = action.context
+    props.onClick = action.onClick.bind(context, data)
+  }
   return (
-    <Link to={link}>
+    <Link {...props}>
       <Button {...action.button_options}>
         {action.label}
       </Button>

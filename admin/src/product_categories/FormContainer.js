@@ -5,8 +5,12 @@ import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 import Dropzone from 'react-dropzone'
 
-import { List, Datagrid, Button, Icon, SearchBox, Loader } from '../base/components'
-import { fetchProductCategory, createProductCategory, dropFile } from './actions'
+import {
+  List, Datagrid, Button, Icon, SearchBox, Loader, ImageLoader
+} from '../base/components'
+import {
+  fetchProductCategory, createProductCategory, updateProductCategory, dropFile
+} from './actions'
 
 class DropzoneImage extends Component {
   getPreview() {
@@ -28,8 +32,18 @@ class DropzoneImage extends Component {
 
 class FormContainer extends Component {
   componentDidMount() {
+    this.loaded = false
     if (this.props.params.id) {
       this.props.fetchProductCategory(this.props.params.id)
+    }
+  }
+  componentWillUpdate(nextProps, nextState) {
+    if (this.props.params.id && !this.loaded) {
+      const { data } = nextProps.product_category
+      if (data && data._id) {
+        this.loaded = true
+        this.refs.name.value = data.name
+      }
     }
   }
   handleSubmit(e) {
@@ -38,10 +52,35 @@ class FormContainer extends Component {
       name: this.refs.name.value,
       image: this.props.product_category.file
     }
-    this.props.createProductCategory(data)
+    if (this.props.params.id) {
+      this.props.updateProductCategory(this.props.params.id, data)
+    } else {
+      this.props.createProductCategory(data)
+    }
   }
   onDrop(files) {
     this.props.dropFile(files[0])
+  }
+  currentImage() {
+    if (this.props.params.id) {
+      const { data } = this.props.product_category
+      if (data && data.image) {
+        return (
+          <div className="form-group">
+            <div className="text-center">
+              <div className="">
+                <label>Image atual</label>
+              </div>
+              <ImageLoader
+                image={data.image.large}
+                size={200}
+                className="img-thumbnail"
+                />
+            </div>
+          </div>
+        )
+      }
+    }
   }
   render() {
     const btn_class = classNames({
@@ -66,6 +105,7 @@ class FormContainer extends Component {
             </label>
             <input type="text" className="form-control" id="name" ref="name" required />
           </div>
+          {this.currentImage()}
           <div className="form-group">
             <label htmlFor="image">
               <FormattedMessage id="product_categories.fields.image" />
@@ -98,6 +138,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     createProductCategory: (data) => {
       dispatch(createProductCategory(data))
+    },
+    updateProductCategory: (id, data) => {
+      dispatch(updateProductCategory(id, data))
     },
     fetchProductCategory: (id) => {
       dispatch(fetchProductCategory(id))

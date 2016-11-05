@@ -2,38 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { FormattedMessage } from 'react-intl'
-import { fetchProductCategories } from './actions'
-import { List, Datagrid, Button, Icon, SearchBox, Loader } from '../base/components'
-
-// @todo Deixar mais modular e criar dentro de @base
-class ImageLoader extends Component {
-  onLoadError() {
-    this.timeout = setTimeout(this.tryLoadImage.bind(this), 1000)
-  }
-  tryLoadImage() {
-    this.refs.image.src = this.props.image
-  }
-  onLoadSuccess() {
-    this.refs.box_image.className = 'loading-image'
-  }
-  render() {
-    return (
-      <div ref="box_image" className="loading-image active">
-        <div className="spinner-box">
-          <Loader />
-        </div>
-        <img
-          ref="image"
-          src={this.props.image}
-          className="img-thumbnail"
-          onLoad={this.onLoadSuccess.bind(this)}
-          onError={this.onLoadError.bind(this)}
-          width={50}
-          />
-      </div>
-    )
-  }
-}
+import { fetchProductCategories, deleteProductCategory } from './actions'
+import {
+  List, Datagrid, Button, Icon, SearchBox, Loader, ImageLoader
+} from '../base/components'
 
 class ListContainer extends Component {
   componentDidMount() {
@@ -62,7 +34,7 @@ class ListContainer extends Component {
       field: 'image',
       getValue: (item) => {
         if (item.image && item.image.thumb) {
-          return <ImageLoader image={item.image.thumb} />
+          return <ImageLoader image={item.image.thumb} size={50} />
         }
       }
     }]
@@ -79,7 +51,12 @@ class ListContainer extends Component {
       link: function(data) {
         return `/product_categories/${data._id}/delete`
       },
-      button_options: { danger: true, xsmall: true, icon: true }
+      button_options: { danger: true, xsmall: true, icon: true },
+      context: this,
+      onClick: function(data, e) {
+        e.preventDefault()
+        this.props.deleteProductCategory(data._id)
+      }
     }]
     return (
       <List 
@@ -121,6 +98,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchProductCategories: (options) => {
       dispatch(fetchProductCategories(options))
+    },
+    deleteProductCategory: (id) => {
+      dispatch(deleteProductCategory(id))
     }
   }
 }
