@@ -45,7 +45,11 @@ const schema = mongoose.Schema({
   images: [Image],
   comments: [Comment],
   contact_type: String,
-  contact_value: String
+  contact_value: String,
+  active: {
+    type: Boolean,
+    default: true
+  }
 }, {
   timestamps: true
 })

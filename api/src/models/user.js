@@ -47,4 +47,9 @@ schema.statics.byAccessToken = function(access_token) {
   return this.findOne({ 'facebook.accessToken': access_token }).exec()
 }
 
+schema.statics.disable = function (user) {
+  user.set('active', false)
+  return user
+}
+
 export default mongoose.model('User', schema)

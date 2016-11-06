@@ -9,6 +9,7 @@ import login from './login'
 import loginWeb from './login_web'
 import loginCallback from './login_callback'
 import profile from './profile'
+import disable from './disable'
 
 const router = express.Router()
 
@@ -22,5 +23,6 @@ router.post('/login', login)
 router.get('/login-web', loginWeb)
 router.get('/login/callback', loginCallback)
 router.post('/profile', authenticated, profile)
+router.post('/disable', authenticated, disable)
 
 export default router
