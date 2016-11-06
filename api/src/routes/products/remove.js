@@ -1,6 +1,4 @@
-import fs from 'fs'
-import { ProductFavorite } from '../../models'
-import { handleError, productImage } from '../../helpers'
+import { productImage } from '../../helpers'
 
 export default (req, res, next) => {
   let product = req.product

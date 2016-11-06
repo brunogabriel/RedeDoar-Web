@@ -10,7 +10,7 @@ const Image = mongoose.Schema({
 const Comment = mongoose.Schema({
   comment: {
     type: String,
-    minlength: [3, 'Digite seu comentário']
+    required: [true, 'Digite seu comentário']
   },
   reply: String,
   user: {
@@ -22,8 +22,14 @@ const Comment = mongoose.Schema({
 })
 
 const schema = mongoose.Schema({
-  title: String,
-  description: String,
+  title: {
+    type: String,
+    required: [true, 'Digite um título']
+  },
+  description: {
+    type: String,
+    required: [true, 'Digite uma descrição da doação']
+  },
   location: {
     context: String,
     latlng: {
@@ -32,8 +38,14 @@ const schema = mongoose.Schema({
       sparse: true
     }
   },
-  delivery: String,
-  condition: String,
+  delivery: {
+    type: String,
+    required: [true, 'Informe a forma de entrega da doação']
+  },
+  condition: {
+    type: String,
+    required: [true, 'Coloque a condição do item']
+  },
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'ProductCategory'
@@ -44,11 +56,25 @@ const schema = mongoose.Schema({
   },
   images: [Image],
   comments: [Comment],
-  contact_type: String,
-  contact_value: String,
+  contact_type: {
+    type: String,
+    required: [true, 'Informe a forma de contato que prefere receber']
+  },
+  contact_value: {
+    type: String,
+    required: [true, 'Informe o contato para a doação']
+  },
   active: {
     type: Boolean,
     default: true
+  },
+  to_user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  state: {
+    type: String,
+    enum: ['donated', 'canceled']
   }
 }, {
   timestamps: true
@@ -86,5 +112,9 @@ schema.methods.getImageOptions = function () {
     }
   }
 }
+
+// schema.path('state').validate(function (value) {
+//   return /donated|canceled/i.test(value)
+// }, 'Invalid color')
 
 export default mongoose.model('Product', schema)

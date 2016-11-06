@@ -1,5 +1,5 @@
 import { Product } from '../../models'
-import { cropFiles, productImage, productView } from '../../helpers'
+import { cropFiles, productImage, productView, handleError } from '../../helpers'
 
 export default (req, res, next) => {
   let product = req.product
@@ -27,5 +27,7 @@ export default (req, res, next) => {
       output.data = productView.prepareData(product)
       res.send(output)
     }
+  }, (err) => {
+    next({ message: handleError.getMessage(err) })
   })
 }
