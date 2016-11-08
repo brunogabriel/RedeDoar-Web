@@ -1,6 +1,7 @@
 import FB from 'fb'
 import { User } from '../../models'
 import config from '../../config'
+import { api } from '../../helpers'
 
 export default (req, res, next) => {
   if (req.body.token) {
@@ -44,6 +45,7 @@ export default (req, res, next) => {
           if (terms_of_use !== undefined) {
             user_data.termsOfUse = terms_of_use
           }
+          let termsOfUseUrl = api.url('/terms-of-use?lang=pt-br')
           if (!user) {
             return User.createAccount(user_data).then((user) => {
               let notifications_count = 101
@@ -52,7 +54,8 @@ export default (req, res, next) => {
                 new_account: !user.termsOfUse,
                 access_token: access_token,
                 data: user,
-                notifications: notifications_count
+                notifications: notifications_count,
+                termsOfUseUrl: termsOfUseUrl
               })
             })
           } else {
@@ -76,7 +79,8 @@ export default (req, res, next) => {
                     new_account: !user.termsOfUse,
                     access_token: access_token,
                     data: user,
-                    notifications: notifications_count
+                    notifications: notifications_count,
+                    termsOfUseUrl: termsOfUseUrl
                   })
                 })
               } else {

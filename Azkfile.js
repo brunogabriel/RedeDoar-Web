@@ -27,7 +27,8 @@ systems({
       NODE_ENV: 'dev',
       HOST: '0.0.0.0',
       PORT: '8000',
-      DROP_DATABASE: false
+      DROP_DATABASE: false,
+      REDEDOAR_API_URL: 'http://rede-doar-api.dev.azk.io'
     },
   },
   'mongodb': {

@@ -8,6 +8,7 @@ import products from './products'
 import product_categories from './product_categories'
 import product_favorites from './product_favorites'
 import admin from './admin'
+import { terms_of_use } from './pages'
 
 router.use('/', home)
 router.use('/users', users)
@@ -15,6 +16,7 @@ router.use('/products', products)
 router.use('/product_categories', authenticated, product_categories)
 router.use('/product_favorites', authenticated, product_favorites)
 router.use('/admin', admin)
+router.use('/terms-of-use', terms_of_use)
 router.use(express.static('public'))
 
 router.use((err, req, res, next) => {
