@@ -45,7 +45,7 @@ export default (req, res, next) => {
           if (terms_of_use !== undefined) {
             user_data.termsOfUse = terms_of_use
           }
-          let termsOfUseUrl = api.url('/terms-of-use?lang=pt-br')
+          let termsOfUseUrl = api.url(`/terms-of-use?language=${req.body.language}`)
           if (!user) {
             return User.createAccount(user_data).then((user) => {
               let notifications_count = 101

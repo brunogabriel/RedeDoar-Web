@@ -9,9 +9,9 @@ import i18n from 'i18n'
 i18n.configure({
   locales:['en', 'pt-br'],
   directory: __dirname + '/locales',
-  defaultLocale: 'pt-br',
+  defaultLocale: 'en',
   cookie: 'rededoarapi',
-  queryParameter: 'lang'
+  queryParameter: 'language'
 })
 
 let app = express()
