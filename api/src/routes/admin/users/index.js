@@ -1,10 +1,10 @@
 import express from 'express'
 const router = express.Router()
 
-import login from './login'
-import profile from './profile'
+import list from './list'
+import show from './show'
 
-router.post('/login', login)
-router.post('/profile', profile)
+router.post('/list', list)
+router.post('/:id', show)
 
 export default router

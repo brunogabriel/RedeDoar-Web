@@ -10,7 +10,8 @@ export default {
     let limit = req.query.limit || 10
     return limit
   },
-  getOptions: function (req, options, model) {
+  getParams: function (req, model) {
+    let options = {}
     let filter = req.query.filter || null
     let search = req.query.search || null
     if (filter && search) {
@@ -18,16 +19,17 @@ export default {
     }
     return options
   },
-  getParams: function(req, model) {
+  getOptions: function(req, model, options) {
     let page = this.getPage(req)
     let limit = this.getLimit(req)
-    let params = { page: page, limit: limit }
+    options.page = page
+    options.limit = limit
     let order = req.query.order || null
     if (order) {
       order = this.parseOrder(order, model)
-      if (order) params.sort = order
+      if (order) options.sort = order
     }
-    return params
+    return options
   },
   parseOrder: function(order, model) {
     let direction = '+'
@@ -44,8 +46,8 @@ export default {
   },
   paginate: function(model, req, options={}) {
     let params = this.getParams(req, model)
-    options = this.getOptions(req, options, model)
-    return model.paginate(options, params).then((result) => {
+    options = this.getOptions(req, model, options)
+    return model.paginate(params, options).then((result) => {
       let data = result.docs
       delete result.docs
       return { data: data, paging: result }

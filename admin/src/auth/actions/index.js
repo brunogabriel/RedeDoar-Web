@@ -55,7 +55,7 @@ export function submitLogin({ username, password }) {
   return dispatch => {
     dispatch(sendingLogin())
     request
-      .post(api.url('/users/login'))
+      .post(api.url('/auth/login'))
       .set('Accept', 'application/json')
       .type('form')
       .send({ username: username, password: password })
@@ -86,7 +86,7 @@ export function checkSession() {
       if (token) {
         dispatch({ type: CHECKING_SESSION })
         request
-          .post(api.url('/users/profile'))
+          .post(api.url('/auth/profile'))
           .set('Accept', 'application/json')
           .type('form')
           .send({ token: token })

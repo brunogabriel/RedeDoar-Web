@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate'
 
 const schema = mongoose.Schema({
   name: String,
@@ -34,6 +35,8 @@ const schema = mongoose.Schema({
 }, {
   timestamps: true
 })
+
+schema.plugin(mongoosePaginate)
 
 schema.statics.hasFacebookId = function(facebook_id) {
   return this.findOne({ 'facebook.id': facebook_id }).exec()
