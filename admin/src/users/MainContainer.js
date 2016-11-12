@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { FormattedMessage } from 'react-intl'
 import { BaseContainer } from '../base'
 
 class MainContainer extends Component {
@@ -13,18 +11,4 @@ class MainContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ...state.user
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MainContainer)
+export default MainContainer

@@ -1,5 +1,6 @@
 import { User } from '../../../models'
 import { Product } from '../../../models'
+import { handleError } from '../../../helpers'
 
 export default (req, res, next) => {
   let fields = 'name gender email picture language active'
@@ -9,10 +10,13 @@ export default (req, res, next) => {
       .sort({ _id: 'desc' })
       .then((products) => {
         data.set('products', products, { strict: false })
+        data.set('products_count', products.length, { strict: false })
         res.send({
           status: true,
           data: data
         })
       })
+  }, (err) => {
+    next({ message: handleError.getMessage(err) })
   })
 }

@@ -3,7 +3,9 @@ import { push } from 'react-router-redux'
 import { api, error } from '../../helpers'
 import {
   REQUEST_USERS,
-  RECEIVE_USERS
+  RECEIVE_USERS,
+  REQUEST_USER,
+  RECEIVE_USER
 } from '../constants'
 
 function requestUsers(options) {
@@ -20,7 +22,21 @@ function receiveUsers(list) {
   }
 }
 
-export function fetchUsers({ page = 1, limit = 10, order = '-_id', callback = null, search = null, filter = 'name' }) {
+function requestUser(id) {
+  return {
+    type: REQUEST_USER,
+    id
+  }
+}
+
+function receiveUser(user) {
+  return {
+    type: RECEIVE_USER,
+    user
+  }
+}
+
+export function fetchUsers({ page = 1, limit = 9, order = '-_id', callback = null, search = null, filter = 'name' }) {
   return (dispatch) => {
     if (!callback) {
       dispatch(requestUsers({ page: page, search: search }))
@@ -49,6 +65,25 @@ export function fetchUsers({ page = 1, limit = 10, order = '-_id', callback = nu
             callback(res.body)
           }
         }
+      })
+  }
+}
+
+export function fetchUser(id) {
+  return (dispatch) => {
+    dispatch(requestUser(id))
+    request
+      .post(api.url(`/users/${id}`))
+      .send(api.params())
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        let user = {}
+        if (err) {
+          error.handleAjax(err, res, dispatch)
+        } else {
+          user = res.body.data
+        }
+        dispatch(receiveUser(user))
       })
   }
 }

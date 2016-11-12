@@ -20,7 +20,7 @@ class BaseContainer extends Component {
             <h1>{this.title}</h1>
           </div>
         </header>
-        <div className="container-fluid">
+        <div className="container-fluid container-main-content">
           <NotificationContainer />
           {this.props.children}
         </div>

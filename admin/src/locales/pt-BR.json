@@ -20,6 +20,7 @@
   "actions.enter": "Entrar",
   "actions.add": "Adicionar",
   "actions.save": "Salvar",
+  "actions.search": "Pesquisar",
   "notifications.closing_in": "Fechando em {seconds} segundos",
   "notifications.click_to_close": "Clique para fechar",
   "pagination.prev": "Anterior",

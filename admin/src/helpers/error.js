@@ -9,7 +9,7 @@ export default {
     if (dispatch) {
       dispatch({
         type: NOTIFICATION_ERROR,
-        message_type: 'error',
+        message_type: 'danger',
         plain_message: true,
         message: message
       })

@@ -1,0 +1,41 @@
+// Block Grid
+// Technique adapted from Foundation 5 for Bootstrap 3.
+// https://github.com/zurb/foundation/blob/f755d8704123f86c281ede0b171881e2672f150d/scss/foundation/components/_block-grid.scss
+// Original LESS Version by Christopher Mitchell (https://gist.github.com/ChrisTM)
+// Converted to SCSS by Rasmus Jürs (https://github.com/Jursdotme)
+
+[class*="block-grid-"]
+  display: block
+  margin: -($grid-gutter-width/2)
+  padding: 0
+  @include clearfix()
+
+.block-grid-item
+  display: inline
+  margin: 0
+  padding: ($grid-gutter-width/2)
+  height: auto
+  float: left
+  list-style: none
+
+@mixin block-grid ($per-row)
+  & > .block-grid-item
+    width: (100%/$per-row)
+    $nth-equation: #{$per-row}n+'+'+1
+    &:nth-of-type(n)
+      clear: none
+    &:nth-of-type(#{$nth-equation})
+      clear: both
+
+@mixin block-grids($size)
+  @for $i from 1 through 12
+    .block-grid-#{$size}-#{$i}
+      @include block-grid($i)
+
+@include block-grids(xs)
+@media (min-width: $screen-sm-min)
+  @include block-grids(sm)
+@media (min-width: $screen-md-min)
+  @include block-grids(md)
+@media (min-width: $screen-lg-min)
+  @include block-grids(lg)
