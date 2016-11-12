@@ -31,7 +31,11 @@ const schema = mongoose.Schema({
   active: {
     type: Boolean,
     default: true
-  }
+  },
+  products: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product'
+  }]
 }, {
   timestamps: true
 })

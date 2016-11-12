@@ -108,7 +108,8 @@ class Nav extends Component {
 Nav.defaultProps = {
   links: [
     { label: 'nav.dashboard', link: '/', key: 'home' },
-    { label: 'nav.product_categories', link: '/product_categories', key: 'product_categories' }
+    { label: 'nav.product_categories', link: '/product_categories', key: 'product_categories' },
+    { label: 'nav.users', link: '/users', key: 'users' }
   ]
 }
 
