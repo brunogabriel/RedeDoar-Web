@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { FormattedMessage } from 'react-intl'
 import { UserItemList } from './components'
-import { Loader } from '../base/components'
+import { Loader, Icon } from '../base/components'
 import { fetchUser } from './actions'
 
 class ProductItem extends Component {
@@ -50,6 +50,13 @@ class ShowContainer extends Component {
           </div>
           <div className="col-sm-8">
             <div className="user-products-list">
+              <h4 className="user-products-main-title">
+                <Icon name="circle_star" size={24} />
+                <FormattedMessage
+                  id="users.donation_items"
+                  defaultMessage="Lista de items para doação"
+                />
+              </h4>
               {this.props.data.products.map((item) => {
                 return <ProductItem key={item._id} {...item} />
               })}
