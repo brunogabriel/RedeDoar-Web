@@ -2,18 +2,14 @@ import { Product } from '../../models'
 import { productView } from '../../helpers'
 
 export default (req, res, next) => {
-  let options = {
-    active: true
-  }
-  return Product.find(options)
+  return Product.findById(req.params.product_id)
     .populate('user', 'name')
     .populate('category', 'name')
-    .sort({ _id: 'desc' })
-    .then((products) => {
-      products = productView.prepareData(products)
+    .then((product) => {
+      product = productView.prepareData(product)
       res.send({
         status: true,
-        data: products
+        data: product
       })
     })
 }

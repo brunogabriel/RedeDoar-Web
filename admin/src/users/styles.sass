@@ -59,9 +59,10 @@
     .icon
       margin-right: 5px
   .user-product-item
-    border-bottom: 1px solid #eee
+    border-bottom: 1px dashed #ddd
     padding-bottom: 20px
     margin-bottom: 20px
+    overflow: hidden
     &:last-child
       border: 0
       padding-bottom: 0
@@ -72,9 +73,22 @@
       display: block
       margin: 0 0 5px 0
     .user-product-item-title
-      font-size: 26px
+      font-size: 20px
       margin: 0 0 5px 0
       font-weight: 600
     .user-product-item-description
       font-size: 16px
       margin: 0
+  .user-product-image
+    float: left
+    img 
+      max-width: 70px
+      display: block
+      margin-bottom: 10px
+      &:last-child
+        margin-bottom: 0
+  .user-product-data
+    margin-left: 85px
+  .user-product-data-list
+    margin: 10px 0 0 0
+    padding-left: 15px

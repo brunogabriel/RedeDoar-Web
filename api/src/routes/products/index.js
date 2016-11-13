@@ -10,6 +10,7 @@ import edit from './edit'
 import remove from './remove'
 import comment from './comment'
 import close from './close'
+import show from './show'
 import { validProduct, validProductUser, authenticated } from '../filters'
 
 const router = express.Router()
@@ -38,6 +39,7 @@ let upload = multer({ storage: storage, fileFilter: fileFilter })
 
 router.post('/', authenticated, list)
 router.post('/add', upload.any(), authenticated, add)
+router.post('/:product_id', authenticated, show)
 router.post('/:product_id/comment', authenticated, validProduct, comment)
 router.post('/:product_id/edit', upload.any(), authenticated, validProductUser, edit)
 router.post('/:product_id/remove', authenticated, validProductUser, remove)
