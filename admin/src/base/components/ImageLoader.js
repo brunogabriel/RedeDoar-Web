@@ -2,8 +2,14 @@ import React, { Component, PropTypes } from 'react'
 import { Loader } from './'
 
 export default class ImageLoader extends Component {
+  componentDidMount() {
+    this.count = 0
+  }
   onLoadError() {
-    this.timeout = setTimeout(this.tryLoadImage.bind(this), 500)
+    if (this.count < 3) {
+      this.count++
+      this.timeout = setTimeout(this.tryLoadImage.bind(this), 2000)
+    }
   }
   tryLoadImage() {
     this.refs.image.src = this.props.image
