@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
+import { Link } from 'react-router'
+import { SwitchPaper } from '../../base/components'
 import moment from 'moment'
 
 export default class ProductItem extends Component {
@@ -11,6 +13,70 @@ export default class ProductItem extends Component {
             return <img key={image._id} src={image.thumb} className="img-thumbnail" />
           })}
         </div>
+      )
+    }
+  }
+  toggleProduct() {
+    this.props.toggleProduct(this.props._id, this.props.active)
+  }
+  getStatus() {
+    if (!this.props.state) {
+      if (this.props.userActive) {
+        return (
+          <div>
+            <strong>
+              <FormattedMessage id="users.fields.active" defaultMessage="Ativo" />
+              <span>: </span>
+            </strong>
+            <SwitchPaper
+              size="small"
+              enabled={this.props.active}
+              onClick={this.toggleProduct.bind(this)}
+              />
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <strong>
+              <FormattedMessage id="users.fields.active" defaultMessage="Ativo" />
+              <span>: </span>
+            </strong>
+            <FormattedMessage id="users.fields.disabled" defaultMessage="Inativo" />
+          </div>
+        )
+      }
+    }
+  }
+  getState() {
+    if (this.props.state == 'donated') {
+      if (this.props.to_user) {
+        let userLink = (
+          <Link to={`/users/${this.props.to_user._id}/show`}>
+            <strong>{this.props.to_user.name}</strong>
+          </Link>
+        )
+        return (
+          <FormattedMessage
+            id="users.products.donated_to_user"
+            defaultMessage="Doado para {name}"
+            values={{ name: userLink }}
+            />
+        )
+      } else {
+        return (
+          <FormattedMessage
+            id="users.products.donated_somebody"
+            defaultMessage="Doado para alguêm de fora do app"
+            />
+        )
+      }
+    } else if (this.props.state == 'cancelled') {
+      return (
+        <FormattedMessage
+          id="users.products.cancelled_donation"
+          defaultMessage="Doacão cancelada"
+          />
       )
     }
   }
@@ -62,14 +128,8 @@ export default class ProductItem extends Component {
               {this.props.contact_value}
             </li>
             <li>
-              <strong>
-                <FormattedMessage id="users.fields.active" defaultMessage="Ativo" />
-                <span>: </span>
-              </strong>
-              {this.props.active ? 
-                <FormattedMessage id="user.fields.enabled" defaultMessage="Ativo" /> : 
-                <FormattedMessage id="user.fields.disabled" defaultMessage="Desativado" />
-              }
+              {this.getStatus()}
+              {this.getState()}
             </li>
           </ul>
         </div>

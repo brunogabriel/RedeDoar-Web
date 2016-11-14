@@ -8,6 +8,7 @@ export default (req, res, next) => {
     let data = user
     return Product.find({ user: user._id })
       .populate('category', 'name')
+      .populate('to_user', 'name')
       .sort({ _id: 'desc' })
       .then((products) => {
         products = productView.prepareData(products)

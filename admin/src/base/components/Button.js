@@ -16,7 +16,8 @@ class Button extends Component {
       'btn-sm': this.props.small,
       'btn-lg': this.props.large,
       'btn-block': this.props.block,
-      'btn-icon': this.props.icon
+      'btn-icon': this.props.icon,
+      'active': this.props.active
     })
   }
   render() {
@@ -45,7 +46,8 @@ Button.propTypes = {
   small: PropTypes.bool,
   large: PropTypes.bool,
   block: PropTypes.bool,
-  icon: PropTypes.bool
+  icon: PropTypes.bool,
+  active: PropTypes.bool
 }
 
 export default Button

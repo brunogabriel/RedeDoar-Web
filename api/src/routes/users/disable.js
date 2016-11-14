@@ -6,13 +6,12 @@ export default (req, res, next) => {
     return Product.update(
       { user: user.id },
       { active: false },
-      { multi: true },
-      function(err, raw) {
-        res.send({
-          status: true,
-          message: 'Conta desativada com sucesso',
-        })
-      }
-    )
+      { multi: true }
+    ).then((raw) => {
+      res.send({
+        status: true,
+        message: 'Conta desativada com sucesso',
+      })
+    })
   })
 }

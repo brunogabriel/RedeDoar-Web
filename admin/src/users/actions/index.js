@@ -5,7 +5,9 @@ import {
   REQUEST_USERS,
   RECEIVE_USERS,
   REQUEST_USER,
-  RECEIVE_USER
+  RECEIVE_USER,
+  TOGGLE_ACTIVE_USER,
+  TOGGLE_ACTIVE_PRODUCT
 } from '../constants'
 
 function requestUsers(options) {
@@ -84,6 +86,46 @@ export function fetchUser(id) {
           user = res.body.data
         }
         dispatch(receiveUser(user))
+      })
+  }
+}
+
+export function toggleUser(id, active) {
+  return (dispatch) => {
+    request
+      .post(api.url(`/users/${id}/change-status`))
+      .send(api.params({
+        active: !active
+      }))
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        if (err) {
+          error.handleAjax(err, res, dispatch)
+        } else {
+          if (res.body.status) {
+            dispatch({ type: TOGGLE_ACTIVE_USER, id })
+          }
+        }
+      })
+  }
+}
+
+export function toggleProduct(id, active) {
+  return (dispatch) => {
+    request
+      .post(api.url(`/products/${id}/change-status`))
+      .send(api.params({
+        active: !active
+      }))
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        if (err) {
+          error.handleAjax(err, res, dispatch)
+        } else {
+          if (res.body.status) {
+            dispatch({ type: TOGGLE_ACTIVE_PRODUCT, id })
+          }
+        }
       })
   }
 }

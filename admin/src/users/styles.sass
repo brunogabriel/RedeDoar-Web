@@ -13,6 +13,9 @@
       padding: 20px
       text-align: center
       position: relative
+      opacity: 0
+      transform: translateY(10px) scale(.97)
+      animation: showScaleItem 400ms forwards
       &.female
         .user-item-name
           color: #f06292
@@ -37,21 +40,17 @@
         position: absolute
         top: 10px
         right: 10px
-        background: #FF4843
-        border-radius: 2px
-        padding: 2px 5px
-        font-size: 10px
-        font-weight: 600
-        color: white
-        text-transform: uppercase
-        &.active
-          background: #01CFA6
       .user-item-actions
         text-align: left
         margin-top: 20px
+        .btn
+          margin-right: 10px
 
 .user-products-list
   margin-top: 40px
+  opacity: 0
+  transform: translateY(10px) scale(.97)
+  animation: showScaleItem 400ms 100ms forwards
   @media (min-width: 769px)
     margin-top: 0
   .user-products-main-title
@@ -92,3 +91,8 @@
   .user-product-data-list
     margin: 10px 0 0 0
     padding-left: 15px
+
+@keyframes showScaleItem
+  100%
+    opacity: 1
+    transform: translateY(0px) scale(1)

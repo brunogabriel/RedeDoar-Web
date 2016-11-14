@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
-import { Button } from '../../base/components'
+import { Button, SwitchPaper } from '../../base/components'
 
 export default class UserItemList extends Component {
   getImage() {
@@ -14,10 +14,8 @@ export default class UserItemList extends Component {
       )
     }
   }
-  getStatus() {
-    return this.props.active ? 
-      <FormattedMessage id="users.enabled" defaultMessage="Ativo" /> : 
-      <FormattedMessage id="users.disabled" defaultMessage="Inativo" />
+  toggleUser() {
+    this.props.toggleUser(this.props._id, this.props.active)
   }
   render() {
     const userItemClassName = classNames({
@@ -32,7 +30,13 @@ export default class UserItemList extends Component {
     return (
       <li className="block-grid-item">
         <div className={userItemClassName}>
-          <span className={userItemStatus}>{this.getStatus()}</span>
+          <span className={userItemStatus}>
+            <SwitchPaper
+              size="small"
+              enabled={this.props.active}
+              onClick={this.toggleUser.bind(this)}
+              />
+          </span>
           {this.getImage()}
           <h2 className="user-item-name">{this.props.name}</h2>
           <p className="user-item-email">{this.props.email}</p>
