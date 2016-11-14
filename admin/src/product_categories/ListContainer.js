@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import { fetchProductCategories, deleteProductCategory } from './actions'
 import { showDialog, hideDialog } from '../base/actions/dialog'
 import {
-  List, Datagrid, Button, Icon, SearchBox, Loader, ImageLoader, Dialog
+  List, Datagrid, Button, Icon, SearchBox, ImageLoader, Dialog
 } from '../base/components'
 
 class ListContainer extends Component {
@@ -22,15 +22,6 @@ class ListContainer extends Component {
   }
   render() {
     let header = [{
-      label: 'ID',
-      field: '_id',
-      getValue: (item) => {
-        return <code>{item._id}</code>
-      }
-    }, {
-      label: 'Categoria',
-      field: 'name',
-    }, {
       label: 'Imagem',
       field: 'image',
       getValue: (item) => {
@@ -38,6 +29,9 @@ class ListContainer extends Component {
           return <ImageLoader image={item.image.thumb} size={50} />
         }
       }
+    }, {
+      label: 'Categoria',
+      field: 'name',
     }]
     let actions = [{
       id: 1,

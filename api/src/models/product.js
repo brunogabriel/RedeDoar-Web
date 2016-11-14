@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate'
 
 const Image = mongoose.Schema({
   filename: String,
@@ -79,6 +80,8 @@ const schema = mongoose.Schema({
 }, {
   timestamps: true
 })
+
+schema.plugin(mongoosePaginate)
 
 schema.methods.patchEntity = function (data) {
   this.set('title', data.title)

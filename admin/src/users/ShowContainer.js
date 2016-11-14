@@ -37,34 +37,32 @@ class ShowContainer extends Component {
       )
     }
     return (
-      <div>
-        <div className="row">
-          <div className="col-sm-4">
-            <ul className="users-list block-grid-xs-1">
-              <UserItemList
-                {...this.props.data}
-                show={true}
-                toggleUser={this.props.toggleUser}
+      <div className="row">
+        <div className="col-sm-4">
+          <ul className="users-list block-grid-xs-1">
+            <UserItemList
+              {...this.props.data}
+              show={true}
+              toggleUser={this.props.toggleUser}
+              />
+          </ul>
+        </div>
+        <div className="col-sm-8">
+          <div className="user-products-list">
+            <h3 className="user-products-main-title">
+              <FormattedMessage
+                id="users.donation_items"
+                defaultMessage="Lista de items para doação"
+              />
+            </h3>
+            {this.props.data.products.map((item) => {
+              return <ProductItem
+                key={item._id}
+                {...item}
+                userActive={this.props.data.active}
+                toggleProduct={this.props.toggleProduct}
                 />
-            </ul>
-          </div>
-          <div className="col-sm-8">
-            <div className="user-products-list">
-              <h3 className="user-products-main-title">
-                <FormattedMessage
-                  id="users.donation_items"
-                  defaultMessage="Lista de items para doação"
-                />
-              </h3>
-              {this.props.data.products.map((item) => {
-                return <ProductItem
-                  key={item._id}
-                  {...item}
-                  userActive={this.props.data.active}
-                  toggleProduct={this.props.toggleProduct}
-                  />
-              })}
-            </div>
+            })}
           </div>
         </div>
       </div>

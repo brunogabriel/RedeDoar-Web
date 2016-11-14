@@ -2,49 +2,48 @@ import request from 'superagent'
 import { push } from 'react-router-redux'
 import { api, error } from '../../helpers'
 import {
-  REQUEST_USERS,
-  RECEIVE_USERS,
-  REQUEST_USER,
-  RECEIVE_USER,
-  TOGGLE_ACTIVE_USER,
-  TOGGLE_ACTIVE_PRODUCT_USER
+  REQUEST_PRODUCTS,
+  RECEIVE_PRODUCTS,
+  REQUEST_PRODUCT,
+  RECEIVE_PRODUCT,
+  TOGGLE_ACTIVE_PRODUCT
 } from '../constants'
 
-function requestUsers(options) {
+function requestProducts(options) {
   return {
-    type: REQUEST_USERS,
+    type: REQUEST_PRODUCTS,
     ...options
   }
 }
 
-function receiveUsers(list) {
+function receiveProducts(list) {
   return {
-    type: RECEIVE_USERS,
+    type: RECEIVE_PRODUCTS,
     list
   }
 }
 
-function requestUser(id) {
+function requestProduct(id) {
   return {
-    type: REQUEST_USER,
+    type: REQUEST_PRODUCT,
     id
   }
 }
 
-function receiveUser(user) {
+function receiveProduct(user) {
   return {
-    type: RECEIVE_USER,
+    type: RECEIVE_PRODUCT,
     user
   }
 }
 
-export function fetchUsers({ page = 1, limit = 9, order = '-_id', callback = null, search = null, filter = 'name' }) {
+export function fetchProducts({ page = 1, limit = 9, order = '-_id', callback = null, search = null, filter = 'title' }) {
   return (dispatch) => {
     if (!callback) {
-      dispatch(requestUsers({ page: page, search: search }))
+      dispatch(requestProducts({ page: page, search: search }))
     }
     request
-      .post(api.url('/users'))
+      .post(api.url('/products'))
       .query(api.params({
         page: page,
         limit: limit,
@@ -62,7 +61,7 @@ export function fetchUsers({ page = 1, limit = 9, order = '-_id', callback = nul
               data: res.body.data,
               paging: res.body.paging
             }
-            dispatch(receiveUsers(list))
+            dispatch(receiveProducts(list))
           } else {
             callback(res.body)
           }
@@ -71,11 +70,11 @@ export function fetchUsers({ page = 1, limit = 9, order = '-_id', callback = nul
   }
 }
 
-export function fetchUser(id) {
+export function fetchProduct(id) {
   return (dispatch) => {
-    dispatch(requestUser(id))
+    dispatch(requestProduct(id))
     request
-      .post(api.url(`/users/${id}`))
+      .post(api.url(`/products/${id}`))
       .send(api.params())
       .set('Accept', 'application/json')
       .end((err, res) => {
@@ -85,27 +84,7 @@ export function fetchUser(id) {
         } else {
           user = res.body.data
         }
-        dispatch(receiveUser(user))
-      })
-  }
-}
-
-export function toggleUser(id, active) {
-  return (dispatch) => {
-    request
-      .post(api.url(`/users/${id}/change-status`))
-      .send(api.params({
-        active: !active
-      }))
-      .set('Accept', 'application/json')
-      .end((err, res) => {
-        if (err) {
-          error.handleAjax(err, res, dispatch)
-        } else {
-          if (res.body.status) {
-            dispatch({ type: TOGGLE_ACTIVE_USER, id })
-          }
-        }
+        dispatch(receiveProduct(user))
       })
   }
 }
@@ -123,7 +102,7 @@ export function toggleProduct(id, active) {
           error.handleAjax(err, res, dispatch)
         } else {
           if (res.body.status) {
-            dispatch({ type: TOGGLE_ACTIVE_PRODUCT_USER, id })
+            dispatch({ type: TOGGLE_ACTIVE_PRODUCT, id })
           }
         }
       })

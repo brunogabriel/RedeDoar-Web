@@ -16,6 +16,7 @@ import { NoMatchContainer } from './base'
 // routes
 import { routes as productCategoriesRoutes } from './product_categories'
 import { routes as usersRoutes } from './users'
+import { routes as productsRoutes } from './products'
 
 // styles
 import '../scss/app.sass'
@@ -34,6 +35,7 @@ ReactDOM.render((
         <Route path="/dashboard" component={DashboardContainer} />
         {productCategoriesRoutes}
         {usersRoutes}
+        {productsRoutes}
         <Route path="*" component={NoMatchContainer} />
       </Route>
     </Router>

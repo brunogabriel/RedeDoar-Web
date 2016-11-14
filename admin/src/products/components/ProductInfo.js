@@ -4,11 +4,11 @@ import { Link } from 'react-router'
 import { SwitchPaper, Icon } from '../../base/components'
 import moment from 'moment'
 
-export default class ProductItem extends Component {
+export default class ProductInfo extends Component {
   getImage() {
     if (this.props.images.length > 0) {
       return (
-        <div className="user-product-image">
+        <div className="product-image">
           {this.props.images.map((image) => {
             return <img key={image._id} src={image.thumb} className="img-thumbnail" />
           })}
@@ -21,7 +21,7 @@ export default class ProductItem extends Component {
   }
   getStatus() {
     if (!this.props.state) {
-      if (this.props.userActive) {
+      if (this.props.user.active) {
         return (
           <div>
             <strong>
@@ -82,13 +82,13 @@ export default class ProductItem extends Component {
   }
   render() {
     return (
-      <div className="user-product-item">
+      <div className="product-info">
         {this.getImage()}
-        <div className="user-product-data">
-          <small className="user-product-item-created-at">{moment(this.props.createdAt).format('LLL')}</small>
-          <h2 className="user-product-item-title">{this.props.title}</h2>
-          <p className="user-product-item-description">{this.props.description}</p>
-          <ul className="user-product-data-list">
+        <div className="product-data">
+          <small className="product-item-created-at">{moment(this.props.createdAt).format('LLL')}</small>
+          <h2 className="product-item-title">{this.props.title}</h2>
+          <p className="product-item-description">{this.props.description}</p>
+          <ul className="product-data-list">
             <li>
               <strong>
                 <FormattedMessage id="users.fields.delivery" defaultMessage="Forma de entrega" />
@@ -132,9 +132,6 @@ export default class ProductItem extends Component {
               {this.getState()}
             </li>
           </ul>
-          <Link to={`/products/${this.props._id}/show`} className="btn btn-primary btn-sm">
-            <FormattedMessage id="actions.details" defaultMessage="Detalhes" />
-          </Link>
         </div>
       </div>
     )
