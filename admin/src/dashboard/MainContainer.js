@@ -1,25 +1,55 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import ReactHighcharts from 'react-highcharts'
 import { BaseContainer } from '../base'
-import { showNotification } from '../notifications/actions'
+import { fetchStats } from './actions'
+import {
+  DonationChart,
+  ActiveDonationsCounter,
+  CanceledDonationsCounter,
+  DonationsMadeCounter
+} from './components'
 
-const MainContainer = ({ showNotification }) => {
-  return (
-    <BaseContainer title="breadcrumb.dashboard">
-      <div className="jumbotron">
-        <h2>Bem-vindo!</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-    </BaseContainer>
-  )
+import './styles.sass'
+
+class MainContainer extends Component {
+  componentDidMount() {
+    this.props.fetchStats()
+  }
+  render() {
+    return (
+      <BaseContainer title="breadcrumb.dashboard">
+        <div className="row">
+          <div className="col-sm-6">
+            <DonationChart data={this.props.stats.donation} />
+          </div>
+          <div className="col-sm-6">
+            <div className="row">
+              <div className="col-sm-12">
+                <ActiveDonationsCounter data={this.props.stats.active_donations} />
+                <DonationsMadeCounter data={this.props.stats.donations_made} />
+                <CanceledDonationsCounter data={this.props.stats.canceled_donations} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </BaseContainer>
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    ...state.dashboard
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    showNotification: (message) => {
-      return dispatch(showNotification(message))
+    fetchStats: () => {
+      return dispatch(fetchStats())
     }
   }
 }
 
-export default connect(null, mapDispatchToProps)(MainContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer)
