@@ -46,3 +46,4 @@ api/public/uploads/*
 api/tmp/*
 !api/tmp/.keep
 .env
+DEV.md
