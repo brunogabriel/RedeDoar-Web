@@ -5,7 +5,7 @@ export default {
   endpoint: () => {
     const endpoints = {
       development: 'http://rede-doar-api.dev.azk.io/admin',
-      staging: 'http://rede-doar-api.dev.azk.io/admin',
+      staging: 'https://rededoar.thiagosf.net/admin',
       production: 'http://rede-doar-api.dev.azk.io/admin'
     }
     if (env.isProduction()) {

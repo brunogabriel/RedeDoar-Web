@@ -5,6 +5,6 @@ export default {
   },
   isStaging: function() {
     const location = window.location
-    return location.host.includes('sandbox.dominio.com.br')
+    return location.host.includes('admin.rededoar.thiagosf.net')
   }
 }
