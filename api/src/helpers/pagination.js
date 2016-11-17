@@ -7,7 +7,7 @@ export default {
     return page
   },
   getLimit: function (req) {
-    let limit = req.query.limit || 10
+    let limit = parseInt(req.query.limit || 10)
     return limit
   },
   getParams: function (req, model) {
