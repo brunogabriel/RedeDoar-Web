@@ -40,7 +40,6 @@ jspm_packages
 .DS_Store
 .azk
 api/public/uploads/*
-!api/public/uploads/.keep
 !api/public/uploads/products/.keep
 !api/public/uploads/product_categories/.keep
 api/tmp/*
