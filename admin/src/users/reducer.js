@@ -4,7 +4,8 @@ import {
   REQUEST_USER,
   RECEIVE_USER,
   TOGGLE_ACTIVE_USER,
-  TOGGLE_ACTIVE_PRODUCT_USER
+  TOGGLE_ACTIVE_PRODUCT_USER,
+  ENABLE_USER_SENDING
 } from './constants'
 
 const initialState = {
@@ -54,6 +55,7 @@ function reducer(state = initialState, action) {
         }
       })
       return Object.assign({}, state, {
+        sending: false,
         data: data,
         list: list
       })
@@ -66,7 +68,13 @@ function reducer(state = initialState, action) {
         }
       })
       return Object.assign({}, state, {
+        sending: false,
         data: data
+      })
+
+    case ENABLE_USER_SENDING:
+      return Object.assign({}, state, {
+        sending: true
       })
 
     default:

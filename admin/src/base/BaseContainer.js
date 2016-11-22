@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Nav } from './components'
 import { MainContainer as NotificationContainer } from '../notifications'
 import { meta, translate } from '../helpers'
+import { Loader } from '../base/components'
+import { body } from '../helpers'
 
 class BaseContainer extends Component {
   constructor(props) {
@@ -14,6 +16,11 @@ class BaseContainer extends Component {
   render() {
     return(
       <div>
+        <div className="main-loader-box">
+          <div className="spinner-box">
+            <Loader />
+          </div>
+        </div>
         <Nav />
         <header className="header main-header">
           <div className="container-fluid">
@@ -44,4 +51,14 @@ BaseContainer.propTypes = {
 }
 
 const mapStateToProps = (state) => { return { intl: state.intl } }
-export default connect(mapStateToProps, null)(BaseContainer)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    enableMainLoader: function() {
+      body.addClass('with-main-loader')
+    },
+    disableMainLoader: function() {
+      body.removeClass('with-main-loader')
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(BaseContainer)

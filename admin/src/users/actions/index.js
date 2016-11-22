@@ -1,13 +1,15 @@
 import request from 'superagent'
 import { push } from 'react-router-redux'
 import { api, error } from '../../helpers'
+import { enableMainLoader, disableMainLoader } from '../../base/actions/spinner'
 import {
   REQUEST_USERS,
   RECEIVE_USERS,
   REQUEST_USER,
   RECEIVE_USER,
   TOGGLE_ACTIVE_USER,
-  TOGGLE_ACTIVE_PRODUCT_USER
+  TOGGLE_ACTIVE_PRODUCT_USER,
+  ENABLE_USER_SENDING
 } from '../constants'
 
 function requestUsers(options) {
@@ -40,6 +42,7 @@ function receiveUser(user) {
 
 export function fetchUsers({ page = 1, limit = 9, order = '-_id', callback = null, search = null, filter = 'name' }) {
   return (dispatch) => {
+    enableMainLoader()
     if (!callback) {
       dispatch(requestUsers({ page: page, search: search }))
     }
@@ -67,6 +70,7 @@ export function fetchUsers({ page = 1, limit = 9, order = '-_id', callback = nul
             callback(res.body)
           }
         }
+        disableMainLoader()
       })
   }
 }
@@ -92,6 +96,7 @@ export function fetchUser(id) {
 
 export function toggleUser(id, active) {
   return (dispatch) => {
+    dispatch({ type: ENABLE_USER_SENDING })
     request
       .post(api.url(`/users/${id}/change-status`))
       .send(api.params({
@@ -112,6 +117,7 @@ export function toggleUser(id, active) {
 
 export function toggleProduct(id, active) {
   return (dispatch) => {
+    dispatch({ type: ENABLE_USER_SENDING })
     request
       .post(api.url(`/products/${id}/change-status`))
       .send(api.params({

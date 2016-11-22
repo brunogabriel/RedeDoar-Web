@@ -1,12 +1,14 @@
 import request from 'superagent'
 import { push } from 'react-router-redux'
 import { api, error } from '../../helpers'
+import { enableMainLoader, disableMainLoader } from '../../base/actions/spinner'
 import {
   REQUEST_PRODUCTS,
   RECEIVE_PRODUCTS,
   REQUEST_PRODUCT,
   RECEIVE_PRODUCT,
-  TOGGLE_ACTIVE_PRODUCT
+  TOGGLE_ACTIVE_PRODUCT,
+  ENABLE_PRODUCT_SENDING
 } from '../constants'
 
 function requestProducts(options) {
@@ -39,6 +41,7 @@ function receiveProduct(user) {
 
 export function fetchProducts({ page = 1, limit = 9, order = '-_id', callback = null, search = null, filter = 'title' }) {
   return (dispatch) => {
+    enableMainLoader()
     if (!callback) {
       dispatch(requestProducts({ page: page, search: search }))
     }
@@ -66,6 +69,7 @@ export function fetchProducts({ page = 1, limit = 9, order = '-_id', callback = 
             callback(res.body)
           }
         }
+        disableMainLoader()
       })
   }
 }
@@ -91,6 +95,7 @@ export function fetchProduct(id) {
 
 export function toggleProduct(id, active) {
   return (dispatch) => {
+    dispatch({ type: ENABLE_PRODUCT_SENDING })
     request
       .post(api.url(`/products/${id}/change-status`))
       .send(api.params({

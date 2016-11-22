@@ -41,7 +41,11 @@ class ShowContainer extends Component {
     return (
       <div className="row">
         <div className="col-sm-12">
-          <ProductInfo {...this.props.data} toggleProduct={this.props.toggleProduct} />
+          <ProductInfo
+            {...this.props.data}
+            toggleProduct={this.props.toggleProduct}
+            sending={this.props.sending}
+            />
         </div>
       </div>
     )
