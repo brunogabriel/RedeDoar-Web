@@ -31,6 +31,7 @@ export default class ProductItem extends Component {
             <SwitchPaper
               size="small"
               enabled={this.props.active}
+              disabled={this.props.sending}
               onClick={this.toggleProduct.bind(this)}
               />
           </div>

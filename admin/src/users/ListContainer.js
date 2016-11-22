@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
-import { fetchUsers, enableDisableUser } from './actions'
+import { fetchUsers, toggleUser } from './actions'
 import { SearchBox, Pagination } from '../base/components'
 import { UserItemList } from './components'
 
@@ -32,7 +32,8 @@ class ListContainer extends Component {
             return <UserItemList
               key={item._id}
               {...item}
-              enableDisableUser={this.props.enableDisableUser}
+              sending={this.props.sending}
+              toggleUser={this.props.toggleUser}
               />
           })}
         </ul>
@@ -58,8 +59,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchUsers: (options) => {
       dispatch(fetchUsers(options))
     },
-    enableDisableUser: (id, active) => {
-      dispatch(enableDisableUser(id, active))
+    toggleUser: (id, active) => {
+      dispatch(toggleUser(id, active))
     }
   }
 }

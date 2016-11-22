@@ -3,7 +3,8 @@ import {
   RECEIVE_PRODUCTS,
   REQUEST_PRODUCT,
   RECEIVE_PRODUCT,
-  TOGGLE_ACTIVE_PRODUCT
+  TOGGLE_ACTIVE_PRODUCT,
+  ENABLE_PRODUCT_SENDING
 } from './constants'
 
 const initialState = {
@@ -53,8 +54,14 @@ function reducer(state = initialState, action) {
         }
       })
       return Object.assign({}, state, {
+        sending: false,
         data: data,
         list: list
+      })
+
+    case ENABLE_PRODUCT_SENDING:
+      return Object.assign({}, state, {
+        sending: true
       })
 
     default:

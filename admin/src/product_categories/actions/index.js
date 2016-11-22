@@ -1,6 +1,7 @@
 import request from 'superagent'
 import { push } from 'react-router-redux'
 import { api, error } from '../../helpers'
+import { enableMainLoader, disableMainLoader } from '../../base/actions/spinner'
 import {
   REQUEST_PRODUCT_CATEGORIES,
   RECEIVE_PRODUCT_CATEGORIES,
@@ -52,6 +53,7 @@ function receiveCreateProductCategory(options) {
 
 export function fetchProductCategories({ page = 1, limit = 10, order = '-_id', callback = null, search = null, filter = 'name' }) {
   return (dispatch) => {
+    enableMainLoader()
     if (!callback) {
       dispatch(requestProductCategories({ page: page, search: search }))
     }
@@ -79,6 +81,7 @@ export function fetchProductCategories({ page = 1, limit = 10, order = '-_id', c
             callback(res.body)
           }
         }
+        disableMainLoader()
       })
   }
 }

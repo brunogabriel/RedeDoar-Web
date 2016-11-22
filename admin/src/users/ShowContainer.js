@@ -43,6 +43,7 @@ class ShowContainer extends Component {
             <UserItemList
               {...this.props.data}
               show={true}
+              sending={this.props.sending}
               toggleUser={this.props.toggleUser}
               />
           </ul>
@@ -61,6 +62,7 @@ class ShowContainer extends Component {
                 {...item}
                 userActive={this.props.data.active}
                 toggleProduct={this.props.toggleProduct}
+                sending={this.props.sending}
                 />
             })}
           </div>
