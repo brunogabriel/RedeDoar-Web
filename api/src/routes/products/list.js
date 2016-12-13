@@ -1,19 +1,47 @@
 import { Product } from '../../models'
-import { productView } from '../../helpers'
+import { productView, handleError, pagination } from '../../helpers'
 
 export default (req, res, next) => {
+  let params = { active: true }
   let options = {
-    active: true
+    select: [
+      '_id',
+      'title',
+      'description',
+      'delivery',
+      'condition',
+      'category',
+      'user',
+      'images',
+      'comments',
+      'contact_type',
+      'contact_value',
+      'to_user',
+      'state',
+      'location.context',
+    ].join(' '),
+    populate: [{
+      path: 'user',
+      select: 'name'
+    }, {
+      path: 'to_user',
+      select: 'name'
+    }, {
+      path: 'category',
+      select: 'name'
+    }]
   }
-  return Product.find(options)
-    .populate('user', 'name')
-    .populate('category', 'name')
-    .sort({ _id: 'desc' })
-    .then((products) => {
-      products = productView.prepareData(products)
-      res.send({
-        status: true,
-        data: products
-      })
+  if (!req.query.latitude && !req.query.longitude) {
+    options.sort = 'title'
+  }
+  return pagination.paginate(Product, req, options, params).then((result) => {
+    let data = productView.prepareData(result.data)
+    res.send({
+      status: true,
+      data: data,
+      paging: result.paging
     })
+  }, (err) => {
+    next({ message: handleError.getMessage(err) })
+  })
 }

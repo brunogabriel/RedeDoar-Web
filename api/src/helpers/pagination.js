@@ -10,13 +10,31 @@ export default {
     let limit = parseInt(req.query.limit || 10)
     return limit
   },
-  getParams: function (req, model) {
+  getParams: function (req, model, params) {
     let options = {}
     let filter = req.query.filter || null
     let search = req.query.search || null
+    let category = req.query.category || null
+    let latitude = req.query.latitude || null
+    let longitude = req.query.longitude || null
+    let maxDistance = parseInt(req.query.maxDistance || 8000)
+
     if (filter && search) {
       options[filter] = new RegExp(`.*${search}.*`, 'ig')
     }
+    if (category) {
+      options.category = category
+    }
+    if (latitude && longitude) {
+      options['location.latlng'] = {
+        $near: [longitude, latitude],
+        $maxDistance: maxDistance
+      }
+    }
+    if (params) {
+      options = _.merge(params, options)
+    }
+
     return options
   },
   getOptions: function(req, model, options) {
@@ -44,8 +62,8 @@ export default {
       return order
     }
   },
-  paginate: function(model, req, options={}) {
-    let params = this.getParams(req, model)
+  paginate: function(model, req, options={}, params={}) {
+    params = this.getParams(req, model, params)
     options = this.getOptions(req, model, options)
     return model.paginate(params, options).then((result) => {
       let data = result.docs

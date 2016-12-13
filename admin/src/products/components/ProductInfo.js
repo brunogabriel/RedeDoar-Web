@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { Link } from 'react-router'
-import { SwitchPaper, Icon } from '../../base/components'
+import { SwitchPaper, Icon, Button } from '../../base/components'
 import moment from 'moment'
 
 export default class ProductInfo extends Component {
@@ -133,6 +133,11 @@ export default class ProductInfo extends Component {
               {this.getState()}
             </li>
           </ul>
+          <Link to={`/users/${this.props.user._id}/show`}>
+            <Button info small>
+              <Icon name="link" size={24} /> {this.props.user.name}
+            </Button>
+          </Link>
         </div>
       </div>
     )
