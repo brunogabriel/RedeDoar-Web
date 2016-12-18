@@ -20,7 +20,7 @@ class ListContainer extends Component {
       label: 'Imagem',
       field: 'image',
       getValue: (item) => {
-        if (item.images) {
+        if (item.images.length > 0) {
           return <ImageLoader image={item.images[0].thumb} size={50} />
         }
       }
