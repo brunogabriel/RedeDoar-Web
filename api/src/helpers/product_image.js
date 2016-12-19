@@ -14,7 +14,7 @@ export default {
     }
   },
   removeDirectory: function(product) {
-    if (product.images) {
+    if (product.images.length > 0) {
       let path = product.images[0].directory
       if (fs.existsSync(path)) {
         fs.readdirSync(path).forEach(function(file,index) {
