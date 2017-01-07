@@ -95,14 +95,14 @@ export default class ProductItem extends Component {
                 <FormattedMessage id="users.fields.delivery" defaultMessage="Forma de entrega" />
                 <span>: </span>
               </strong>
-              {this.props.delivery}
+              {this.props.delivery_label}
             </li>
             <li>
               <strong>
                 <FormattedMessage id="users.fields.condition" defaultMessage="Condição" />
                 <span>: </span>
               </strong>
-              {this.props.condition}
+              {this.props.condition_label}
             </li>
             <li>
               <strong>

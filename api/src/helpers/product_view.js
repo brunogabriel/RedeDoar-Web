@@ -22,10 +22,28 @@ export default {
         product.images[i] = image
       }
     }
+    product.set('delivery_label', this.getDeliveryLabel(product.delivery), { strict: false })
+    product.set('condition_label', this.getConditionLabel(product.condition), { strict: false })
     return product
   },
   getFullPath: function(image, size) {
     let directory = image.directory.replace('public', '')
     return asset.url(`${directory}${size}_${image.filename}`)
+  },
+  getDeliveryLabel: function(delivery) {
+    delivery = parseInt(delivery)
+    const map = {
+      1: 'em mãos',
+      2: 'a combinar',
+    }
+    return (map[delivery] ? map[delivery] : 'não informado')
+  },
+  getConditionLabel: function(condition) {
+    condition = parseInt(condition)
+    const map = {
+      1: 'novo',
+      2: 'usado',
+    }
+    return (map[condition] ? map[condition] : 'não informado')
   }
 }
