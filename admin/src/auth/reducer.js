@@ -2,12 +2,15 @@ import {
   USER_LOGGED_IN,
   USER_LOGGED_OUT,
   CHECKING_SESSION,
-  CHECKED_SESSION
+  CHECKED_SESSION,
+  SENDING_LOGIN,
+  ERROR_LOGIN
 } from './constants'
 
 let initialState = {
   user: {},
-  checking_session: false
+  checking_session: false,
+  sending: false
 }
 
 const auth = (state = initialState, action) => {
@@ -15,7 +18,8 @@ const auth = (state = initialState, action) => {
     case USER_LOGGED_IN:
       return Object.assign({}, state, {
         user: action.user,
-        checking_session: false
+        checking_session: false,
+        sending: false
       })
 
     case USER_LOGGED_OUT:
@@ -34,6 +38,16 @@ const auth = (state = initialState, action) => {
       return Object.assign({}, state, {
         user: {},
         checking_session: false
+      })
+
+    case SENDING_LOGIN:
+      return Object.assign({}, state, {
+        sending: true
+      })
+
+    case ERROR_LOGIN:
+      return Object.assign({}, state, {
+        sending: false
       })
     
     default:
