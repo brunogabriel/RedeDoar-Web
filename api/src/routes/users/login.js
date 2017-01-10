@@ -72,7 +72,7 @@ export default (req, res, next) => {
 
             user.update(user_data).then((data) => {
               if (data.ok) {
-                return User.findById(user.id).then((user) => {
+                return User.findById(user._id).then((user) => {
                   let notifications_count = 101
                   return res.send({
                     status: true,
@@ -82,7 +82,7 @@ export default (req, res, next) => {
                     notifications: notifications_count,
                     termsOfUseUrl: termsOfUseUrl
                   })
-                })
+                }).catch((err) => { next(err) })
               } else {
                 return res.send({
                   status: false,
