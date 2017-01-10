@@ -4,7 +4,7 @@ import { handleError, productView } from '../../../helpers'
 
 export default (req, res, next) => {
   let fields = 'name gender email picture language active'
-  return User.findOne({ _id: req.params.id }, fields).then((user) => {
+  return User.findById(req.params.id, fields).then((user) => {
     let data = user
     return Product.find({ user: user._id })
       .populate('category', 'name')

@@ -3,7 +3,7 @@ import { pagination } from '../../../helpers'
 import { handleError, productView } from '../../../helpers'
 
 export default (req, res, next) => {
-  return Product.findOne({ _id: req.params.id })
+  return Product.findById(req.params.id)
     .populate('user', 'name active')
     .populate('category', 'name')
     .populate('to_user', 'name')
