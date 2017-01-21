@@ -47,6 +47,8 @@ const schema = mongoose.Schema({
     type: String,
     required: [true, 'Coloque a condição do item']
   },
+  email: String,
+  telephone: String,
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'ProductCategory'
@@ -57,14 +59,6 @@ const schema = mongoose.Schema({
   },
   images: [Image],
   comments: [Comment],
-  contact_type: {
-    type: String,
-    required: [true, 'Informe a forma de contato que prefere receber']
-  },
-  contact_value: {
-    type: String,
-    required: [true, 'Informe o contato para a doação']
-  },
   active: {
     type: Boolean,
     default: true
@@ -98,6 +92,7 @@ schema.methods.patchEntity = function (data) {
 schema.methods.getImageOptions = function () {
   return {
     output: 'public/uploads/products/' + this.id + '/',
+    max_files: 5,
     sizes: {
       thumb: {
         width: 100,
@@ -116,8 +111,13 @@ schema.methods.getImageOptions = function () {
   }
 }
 
-// schema.path('state').validate(function (value) {
-//   return /donated|canceled/i.test(value)
-// }, 'Invalid color')
+schema.path('email').validate(function (value) {
+  return this.email || this.telephone
+}, 'Você precisa informar um e-mail ou telefone.')
+
+schema.path('delivery').validate(function (value) {
+  const accept = [1, 2]
+  return accept.indexOf(parseInt(value), accept) > -1
+}, 'Valores aceitos: 1 e 2')
 
 export default mongoose.model('Product', schema)

@@ -31,8 +31,8 @@ schema.methods.getImageOptions = function () {
         quality: 0.1
       },
       large: {
-        width: 400,
-        height: 400
+        width: 256,
+        height: 256
       }
     }
   }

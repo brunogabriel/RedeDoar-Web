@@ -23,7 +23,6 @@ export default {
       }
     }
     product.set('delivery_label', this.getDeliveryLabel(product.delivery), { strict: false })
-    product.set('condition_label', this.getConditionLabel(product.condition), { strict: false })
     return product
   },
   getFullPath: function(image, size) {

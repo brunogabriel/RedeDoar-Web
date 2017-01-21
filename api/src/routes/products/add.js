@@ -12,7 +12,7 @@ export default (req, res, next) => {
       message: 'Produto adicionado com sucesso'
     }
 
-    if (images) {
+    if (images && images.length > 0) {
       product.images = images
       product.save((err) => {
         if (err) new Error(err)
@@ -20,7 +20,9 @@ export default (req, res, next) => {
         res.send(output)
       })
     } else {
-      output.data = productView.prepareData(product)
+      product.remove()
+      output.status = false
+      output.message = 'Você precisa enviar ao menos 1 foto.'
       res.send(output)
     }
   }, (err) => {

@@ -102,7 +102,7 @@ export default class ProductInfo extends Component {
                 <FormattedMessage id="users.fields.condition" defaultMessage="Condição" />
                 <span>: </span>
               </strong>
-              {this.props.condition_label}
+              {this.props.condition}
             </li>
             <li>
               <strong>
@@ -116,17 +116,17 @@ export default class ProductInfo extends Component {
             </li>
             <li>
               <strong>
-                <FormattedMessage id="users.fields.contact_type" defaultMessage="Forma de contato" />
+                <FormattedMessage id="users.fields.email" defaultMessage="E-mail" />
                 <span>: </span>
               </strong>
-              {this.props.contact_type}
+              {this.props.email}
             </li>
             <li>
               <strong>
-                <FormattedMessage id="users.fields.contact_value" defaultMessage="Valor do contato" />
+                <FormattedMessage id="users.fields.telephone" defaultMessage="Telefone" />
                 <span>: </span>
               </strong>
-              {this.props.contact_value}
+              {this.props.telephone}
             </li>
             <li>
               {this.getStatus()}
