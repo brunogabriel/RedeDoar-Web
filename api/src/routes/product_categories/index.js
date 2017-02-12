@@ -4,6 +4,6 @@ import list from './list'
 
 const router = express.Router()
 
-router.post('/', list)
+router.get('/', list)
 
 export default router

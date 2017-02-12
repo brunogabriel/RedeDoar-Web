@@ -31,11 +31,13 @@
     "babel-preset-stage-1": "^6.13.0",
     "chai": "^3.5.0",
     "mocha": "^3.0.2",
-    "nodemon": "^1.10.2"
+    "nodemon": "^1.10.2",
+    "supertest": "^3.0.0"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha --color --compilers js:babel-core/register test",
-    "start": "node_modules/.bin/nodemon --exec node_modules/.bin/babel-node -- server.js"
+    "test": "NODE_ENV=test node_modules/.bin/mocha --color --compilers js:babel-core/register --recursive test",
+    "start": "node_modules/.bin/nodemon --exec node_modules/.bin/babel-node -- server.js",
+    "wt": "NODE_ENV=test node_modules/.bin/mocha --color --compilers js:babel-core/register --watch"
   },
   "repository": {
     "type": "git",
