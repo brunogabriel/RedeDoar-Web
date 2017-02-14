@@ -37,7 +37,7 @@ const fileFilter = (req, file, cb) => {
 
 let upload = multer({ storage: storage, fileFilter: fileFilter })
 
-router.post('/', authenticated, list)
+router.get('/', list)
 router.post('/add', upload.any(), authenticated, add)
 router.post('/:product_id', authenticated, show)
 router.post('/:product_id/comment', authenticated, validProduct, comment)

@@ -32,12 +32,14 @@
     "chai": "^3.5.0",
     "mocha": "^3.0.2",
     "nodemon": "^1.10.2",
+    "pow-mongodb-fixtures": "^0.14.0",
     "supertest": "^3.0.0"
   },
   "scripts": {
     "test": "NODE_ENV=test node_modules/.bin/mocha --color --compilers js:babel-core/register --recursive test",
     "start": "node_modules/.bin/nodemon --exec node_modules/.bin/babel-node -- server.js",
-    "wt": "NODE_ENV=test node_modules/.bin/mocha --color --compilers js:babel-core/register --watch"
+    "wt": "NODE_ENV=test node_modules/.bin/mocha --color --compilers js:babel-core/register --watch",
+    "build": "NODE_ENV=production node_modules/.bin/babel --copy-files --out-dir dist src"
   },
   "repository": {
     "type": "git",
