@@ -25,7 +25,7 @@ Ao baixar atualizações do projeto, é recomendado utilizar o argumento `--repr
 
 Simples assim:
 
-```azk shell -- npm test```
+```azk start && azk shell -- npm test```
 
 ## LICENSE
 

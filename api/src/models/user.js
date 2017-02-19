@@ -10,6 +10,7 @@ const schema = mongoose.Schema({
   score: Number,
   picture: String,
   language: String,
+  password: String,
   facebook: {
     id: String,
     accessToken: String,
@@ -57,6 +58,10 @@ schema.statics.byAccessToken = function(access_token) {
 schema.statics.disable = function (user) {
   user.set('active', false)
   return user
+}
+
+schema.methods.validPassword = function (compare_password) {
+  return this.password == compare_password
 }
 
 export default mongoose.model('User', schema)
