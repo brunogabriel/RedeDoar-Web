@@ -42,7 +42,7 @@ export default (req, res, next) => {
       }
 
       FB.api('/me/', 'get', parameters, (result) => {
-        return User.hasFacebookId(result.id).then((user) => {
+        User.hasFacebookId(result.id).then((user) => {
           let user_data = {
             name: result.name,
             email: result.email,
@@ -55,18 +55,18 @@ export default (req, res, next) => {
             }
           }
           if (!user) {
-            return User.createAccount(user_data).then((user) => {
-              return res.send({
+            User.createAccount(user_data).then((user) => {
+              res.send({
                 status: true,
                 access_token: access_token,
                 expires: expires,
                 new_account: true,
                 data: user
               })
-            })
+            }).catch(next)
           } else {
             user.update(user_data).then((data) => {
-              return res.send({
+              res.send({
                 status: true,
                 access_token: access_token,
                 expires: expires,
@@ -74,7 +74,7 @@ export default (req, res, next) => {
                 data: user,
                 update: data
               })
-            })
+            }).catch(next)
           }
         })
       })

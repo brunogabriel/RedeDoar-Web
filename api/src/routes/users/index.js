@@ -6,10 +6,11 @@ import { User } from '../../models'
 import { authenticated } from '../filters'
 
 import login from './login'
-import loginWeb from './login_web'
+import facebook from './facebook'
 import loginCallback from './login_callback'
 import profile from './profile'
 import disable from './disable'
+import create from './create'
 
 const router = express.Router()
 
@@ -19,9 +20,10 @@ FB.options({
   redirectUri: config.facebook.redirectUri
 });
 
+router.post('/', create)
 router.post('/login', login)
-router.get('/login-web', loginWeb)
-router.get('/login/callback', loginCallback)
+router.get('/facebook', facebook)
+router.get('/facebook/callback', loginCallback)
 router.post('/profile', authenticated, profile)
 router.post('/disable', authenticated, disable)
 

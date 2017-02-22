@@ -6,11 +6,10 @@ export default (req, res, next) => {
   let data = { active: false, state: req.body.state }
   if (req.body.to_user) data.to_user = req.body.to_user
 
-  return Product.update({ _id: req.product.id }, data, options, function(err, raw) {
-    if (err) return next({ message: handleError.getMessage(err) })
+  Product.update({ _id: req.product.id }, data, options).then((product) => {
     res.send({
       status: true,
-      message: 'Sua doação foi fechada com sucesso!'
+      message: res.__('Your donation was successfully closed!')
     })
-  })
+  }).catch(next)
 }

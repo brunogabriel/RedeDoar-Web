@@ -39,7 +39,7 @@ let upload = multer({ storage: storage, fileFilter: fileFilter })
 
 router.get('/', list)
 router.post('/add', upload.any(), authenticated, add)
-router.post('/:product_id', authenticated, show)
+router.get('/:product_id', show)
 router.post('/:product_id/comment', authenticated, validProduct, comment)
 router.post('/:product_id/edit', upload.any(), authenticated, validProductUser, edit)
 router.post('/:product_id/remove', authenticated, validProductUser, remove)

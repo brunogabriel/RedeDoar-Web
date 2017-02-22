@@ -41,7 +41,5 @@ export default (req, res, next) => {
       data: data,
       paging: result.paging
     })
-  }, (err) => {
-    next({ message: handleError.getMessage(err) })
-  })
+  }).catch(next)
 }

@@ -8,16 +8,12 @@ export default (req, res, next) => {
     comment: comment,
     user: req.user.id
   })
-  product.save((err) => {
-    if (!err) {
-      let comment = product.comments[product.comments.length - 1]
-      res.send({
-        status: true,
-        message: 'Comentário salvo com sucesso!',
-        data: comment
-      })
-    } else {
-      next({ message: handleError.getMessage(err) })
-    }
-  })
+  product.save().then((product) => {
+    let comment = product.comments[product.comments.length - 1]
+    res.send({
+      status: true,
+      message: res.__('Comment saved successfully!'),
+      data: comment
+    })
+  }).catch(next)
 }

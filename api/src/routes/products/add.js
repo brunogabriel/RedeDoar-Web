@@ -9,7 +9,7 @@ export default (req, res, next) => {
     let images = cropFiles(req.files, options)
     let output = {
       status: true,
-      message: 'Produto adicionado com sucesso'
+      message: res.__('Donation was saved!')
     }
 
     if (images && images.length > 0) {
@@ -22,10 +22,8 @@ export default (req, res, next) => {
     } else {
       product.remove()
       output.status = false
-      output.message = 'Você precisa enviar ao menos 1 foto.'
+      output.message = res.__('You must send at least 1 photo.')
       res.send(output)
     }
-  }, (err) => {
-    next({ message: handleError.getMessage(err) })
-  })
+  }).catch(next)
 }

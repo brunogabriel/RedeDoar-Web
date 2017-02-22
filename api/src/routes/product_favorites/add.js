@@ -10,25 +10,25 @@ export default (req, res, next) => {
   ProductFavorite.findOne(options).then((product_favorite) => {
     if (!product_favorite) {
       let product_favorite = new ProductFavorite(options)
-      return product_favorite.save().then((product_favorite) => {
+      product_favorite.save().then((product_favorite) => {
         if (product_favorite) {
           res.send({
             status: true,
-            message: 'Produto favoritado com sucesso',
+            message: res.__('Donation saves to favorites'),
             data: product_favorite
           })
         } else {
           res.send({
             status: false,
-            message: 'Erro ao adicionar produto aos favoritos'
+            message: res.__('Erro to add donation in favorites')
           })
         }
-      })
+      }).catch(next)
     } else {
       res.send({
         status: false,
-        message: 'Você já adicionou esse produto aos favoritos'
+        message: res.__('You have already added this to the favorites')
       })
     }
-  })
+  }).catch(next)
 }

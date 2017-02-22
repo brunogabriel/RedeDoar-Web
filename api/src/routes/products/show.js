@@ -2,7 +2,7 @@ import { Product } from '../../models'
 import { productView } from '../../helpers'
 
 export default (req, res, next) => {
-  return Product.findById(req.params.product_id)
+  Product.findById(req.params.product_id)
     .populate('user', 'name')
     .populate('category', 'name')
     .then((product) => {
@@ -11,5 +11,5 @@ export default (req, res, next) => {
         status: true,
         data: product
       })
-    })
+    }).catch(next)
 }

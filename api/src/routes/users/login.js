@@ -21,7 +21,7 @@ export default (req, res, next) => {
         }
         return res.send({
           status: false,
-          message: 'Falha ao efetuar login, usuário não encontrado',
+          message: res.__('Failed to log in, user not found'),
           error: error
         })
       } else {
@@ -84,9 +84,9 @@ export default (req, res, next) => {
                   })
                 }).catch((err) => { next(err) })
               } else {
-                return res.send({
+                res.send({
                   status: false,
-                  message: 'Erro ao atualizar dados'
+                  message: res.__('Error updating data')
                 })
               }
             })
@@ -97,7 +97,7 @@ export default (req, res, next) => {
   } else {
     res.send({
       status: false,
-      message: 'Access token inválido'
+      message: res.__('Invalid access token')
     })
   }
 }

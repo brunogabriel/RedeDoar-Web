@@ -4,7 +4,7 @@ import config from '../../config'
 
 export default (req, res, next) => {
   if (req.query.access_token) {
-    return User.byAccessToken(req.query.access_token).then((user) => {
+    User.byAccessToken(req.query.access_token).then((user) => {
       if (user) {
         res.send({
           status: true,
@@ -13,14 +13,11 @@ export default (req, res, next) => {
       } else {
         res.send({
           status: false,
-          message: 'Access token inválido'
+          message: res.__('Invalid access token')
         })
       }
-    })
+    }).catch(next)
   } else {
-    res.send({
-      status: true,
-      login_url: FB.getLoginUrl({ scope: config.facebook.scope })
-    })
+    res.redirect(FB.getLoginUrl({ scope: config.facebook.scope }))
   }
 }

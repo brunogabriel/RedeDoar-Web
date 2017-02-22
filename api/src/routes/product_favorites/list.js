@@ -5,11 +5,11 @@ export default (req, res, next) => {
   let options = {
     user: req.user.id
   }
-  return ProductFavorite.find(options).then((product_favorites) => {
+  ProductFavorite.find(options).then((product_favorites) => {
     res.send({
       status: true,
-      message: 'Favoritos resgatados com sucesso',
+      message: res.__('Listed favorites'),
       data: product_favorites
     })
-  })
+  }).catch(next)
 }

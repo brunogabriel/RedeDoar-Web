@@ -8,24 +8,24 @@ export default (req, res, next) => {
   }
   ProductFavorite.findOne(options).then((product_favorite) => {
     if (product_favorite) {
-      return product_favorite.remove().then((product_favorite) => {
+      product_favorite.remove().then((product_favorite) => {
         if (product_favorite) {
           res.send({
             status: true,
-            message: 'Favorito removido com sucesso'
+            message: res.__('Favorite successfully removed')
           })
         } else {
           res.send({
             status: false,
-            message: 'Erro ao remover produto dos favoritos'
+            message: res.__('Error removing product from favorites')
           })
         }
-      })
+      }).catch(next)
     } else {
       res.send({
         status: false,
-        message: 'Favorito não encontrado'
+        message: res.__('Favorite not found')
       })
     }
-  })
+  }).catch(next)
 }

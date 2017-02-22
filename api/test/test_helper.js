@@ -2,6 +2,7 @@ import path from 'path'
 import mongoose from 'mongoose'
 import Promise from 'bluebird'
 import fixtures from 'pow-mongodb-fixtures'
+import request from 'supertest'
 import app from '../src'
 
 const db = fixtures.connect(process.env.MONGODB_URI_TEST)
@@ -33,6 +34,23 @@ const loadAllFixtures = (done) => {
   })
 }
 
+const makeRequest = (method, path, statusCode) => {
+  let req = request(app)
+  if (method == 'get') req = req.get(path)
+  if (method == 'post') req = req.post(path)
+  if (statusCode) req = req.expect(statusCode)
+  req = req.expect('Content-Type', /json/)
+  return req
+}
+
 beforeEach(loadAllFixtures)
 
-export { mongoose, openConnection, closeConnection, app }
+after(closeConnection)
+
+export {
+  mongoose,
+  openConnection,
+  closeConnection,
+  app,
+  makeRequest
+}

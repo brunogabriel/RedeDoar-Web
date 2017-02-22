@@ -17,7 +17,7 @@ export default (req, res, next) => {
     } else {
       res.send({
         status: false,
-        message: 'Usuário ou senha inválidos'
+        message: 'Dados inválidos'
       })
     }
   })

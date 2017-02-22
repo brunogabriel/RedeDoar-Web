@@ -8,7 +8,7 @@ export default (req, res, next) => {
     let images = cropFiles(req.files, options)
     let output = {
       status: true,
-      message: 'Produto alterado com sucesso'
+      message: res.__('Donation changed successfully')
     }
 
     if (images.length > 0) {
@@ -18,16 +18,13 @@ export default (req, res, next) => {
         }
       }
       product.images = images
-      product.save((err) => {
-        if (err) new Error(err)
+      product.save().then((product) => {
         output.data = productView.prepareData(product)
         res.send(output)
-      })
+      }).catch(next)
     } else {
       output.data = productView.prepareData(product)
       res.send(output)
     }
-  }, (err) => {
-    next({ message: handleError.getMessage(err) })
-  })
+  }).catch(next)
 }

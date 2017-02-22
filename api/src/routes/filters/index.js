@@ -6,7 +6,7 @@ export const accessTokenRequired = (req, res, next) => {
   if (!req.query.token && !req.body.token) {
     return res.send({
       status: false,
-      message: 'Token inválido'
+      message: res.__('Invalid token')
     })
   }
   const access_token = req.query.token || req.body.token
@@ -22,7 +22,7 @@ export const authenticated = (req, res, next) => {
       } else {
         return res.send({
           status: false,
-          message: 'Você precisa se logar para acessar essa página'
+          message: res.__('You must be logged in to access this page')
         })
       }
     })
@@ -31,23 +31,17 @@ export const authenticated = (req, res, next) => {
 
 export const validProduct = (req, res, next) => {
   let product_id = req.body.product_id || req.params.product_id
-  return Product.findById(product_id).then((product) => {
+  Product.findById(product_id).then((product) => {
     if (product) {
       req.product = product
       next()
     } else {
-      return res.send({
+      res.send({
         status: false,
-        message: 'Produto não encontrado'
+        message: res.__('Donation not found')
       })
     }
-  }, (error) => {
-    return res.send({
-      status: false,
-      message: 'Produto não encontrado',
-      error: error
-    })
-  })
+  }).catch(next)
 }
 
 export const validProductUser = (req, res, next) => {
@@ -56,24 +50,18 @@ export const validProductUser = (req, res, next) => {
     _id: product_id,
     user: req.user.id
   }
-  return Product.findOne(options).then((product) => {
+  Product.findOne(options).then((product) => {
     if (product) {
       req.product = product
       next()
     } else {
-      return res.send({
+      res.send({
         status: false,
-        message: 'Produto não encontrado',
+        message: res.__('Donation not found'),
         product: product
       })
     }
-  }, (error) => {
-    return res.send({
-      status: false,
-      message: 'Produto não encontrado',
-      error: error
-    })
-  })
+  }).catch(next)
 }
 
 export const adminAuthenticated = (req, res, next) => {
@@ -85,42 +73,30 @@ export const adminAuthenticated = (req, res, next) => {
   }
   const token = req.query.token || req.body.token
   const options = { token: token }
-  return AdminUser.findOne(options).then((admin_user) => {
+  AdminUser.findOne(options).then((admin_user) => {
     if (admin_user) {
       req.admin_user = admin_user
       next()
     } else {
-      return res.send({
+      res.send({
         status: false,
-        message: 'Usuário não encontrado'
+        message: res.__('User not found')
       })
     }
-  }, (error) => {
-    return res.send({
-      status: false,
-      message: 'Erro ao buscar usuário',
-      error: error
-    })
-  })
+  }).catch(next)
 }
 
 export const validProductCategory = (req, res, next) => {
   let product_category_id = req.body.product_category_id || req.params.product_category_id
-  return ProductCategory.findById(product_category_id).then((product_category) => {
+  ProductCategory.findById(product_category_id).then((product_category) => {
     if (product_category) {
       req.product_category = product_category
       next()
     } else {
-      return res.send({
+      res.send({
         status: false,
-        message: 'Categoria não encontrada'
+        message: res.__('Category not found')
       })
     }
-  }, (error) => {
-    return res.send({
-      status: false,
-      message: 'Categoria não encontrada',
-      error: error
-    })
-  })
+  }).catch(next)
 }

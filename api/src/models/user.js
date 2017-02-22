@@ -1,16 +1,18 @@
 import mongoose from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate'
+import { generateBcrypt, comparePassword } from '../helpers'
+import params from 'params'
+import moment from 'moment'
 
 const schema = mongoose.Schema({
   name: String,
   email: String,
+  password: String,
   gender: String,
   birthday: Date,
   phone: String,
-  score: Number,
   picture: String,
   language: String,
-  password: String,
   facebook: {
     id: String,
     accessToken: String,
@@ -27,7 +29,10 @@ const schema = mongoose.Schema({
   }],
   termsOfUse: {
     type: Boolean,
-    default: false
+    validate: [{
+      validator: function (value) { return !!value },
+      msg: 'Você precisa aceitar os termos de uso!'
+    }]
   },
   active: {
     type: Boolean,
@@ -43,11 +48,20 @@ const schema = mongoose.Schema({
 
 schema.plugin(mongoosePaginate)
 
+schema.statics.exceptFieldsCreate = [
+  'facebook',
+  'active',
+  'mobileDevices',
+  'products'
+]
+
 schema.statics.hasFacebookId = function(facebook_id) {
   return this.findOne({ 'facebook.id': facebook_id }).exec()
 }
 
 schema.statics.createAccount = function(data) {
+  data = params(data).except(this.exceptFieldsCreate)
+  data.birthday = moment(data.birthday, 'DD/MM/YYYY').toDate()
   return new this(data).save()
 }
 
@@ -61,7 +75,19 @@ schema.statics.disable = function (user) {
 }
 
 schema.methods.validPassword = function (compare_password) {
-  return this.password == compare_password
+  return comparePassword(compare_password, this.password)
 }
+
+schema.methods.updateAccount = function (data) {
+  for (let field in data) {
+    this.set(field, data[field])
+  }
+  return this.save()
+}
+
+schema.pre('save', function (next) {
+  this.password = generateBcrypt(this.password)
+  next()
+})
 
 export default mongoose.model('User', schema)
