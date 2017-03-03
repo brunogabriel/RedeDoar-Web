@@ -10,3 +10,7 @@ export pagination from './pagination'
 export uploadUtils from './upload_utils'
 export api from './api'
 export * from './security'
+
+export const normalizeLocale = (locale) => {
+  return locale.toLowerCase().replace('_', '-')
+}

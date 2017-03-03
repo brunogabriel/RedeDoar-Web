@@ -7,7 +7,9 @@ import { authenticated } from '../filters'
 
 import login from './login'
 import facebook from './facebook'
-import loginCallback from './login_callback'
+import facebookCallback from './facebook_callback'
+import google from './google'
+import googleCallback from './google_callback'
 import profile from './profile'
 import disable from './disable'
 import create from './create'
@@ -23,7 +25,9 @@ FB.options({
 router.post('/', create)
 router.post('/login', login)
 router.get('/facebook', facebook)
-router.get('/facebook/callback', loginCallback)
+router.get('/facebook/callback', facebookCallback)
+router.get('/google', google)
+router.get('/google/callback', googleCallback)
 router.post('/profile', authenticated, profile)
 router.post('/disable', authenticated, disable)
 

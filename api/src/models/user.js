@@ -19,6 +19,12 @@ const schema = mongoose.Schema({
     lastRefresh: Date,
     expires: Date
   },
+  google: {
+    id: String,
+    accessToken: String,
+    idToken: String,
+    expires: Date
+  },
   mobileDevices: [{
     pushId: String,
     platform: String,
@@ -50,6 +56,7 @@ schema.plugin(mongoosePaginate)
 
 schema.statics.exceptFieldsCreate = [
   'facebook',
+  'google',
   'active',
   'mobileDevices',
   'products'
@@ -59,14 +66,24 @@ schema.statics.hasFacebookId = function(facebook_id) {
   return this.findOne({ 'facebook.id': facebook_id }).exec()
 }
 
+schema.statics.hasGoogleId = function(google_id) {
+  return this.findOne({ 'google.id': google_id }).exec()
+}
+
 schema.statics.createAccount = function(data) {
   data = params(data).except(this.exceptFieldsCreate)
   data.birthday = moment(data.birthday, 'DD/MM/YYYY').toDate()
   return new this(data).save()
 }
 
-schema.statics.byAccessToken = function(access_token) {
-  return this.findOne({ 'facebook.accessToken': access_token }).exec()
+schema.statics.byAccessToken = function(access_token, network) {
+  network = network || 'facebook'
+  return this.findOne({ [`${network}.accessToken`]: access_token }).exec()
+}
+
+schema.statics.byNetworkId = function(id, network) {
+  network = network || 'facebook'
+  return this.findOne({ [`${network}.id`]: id }).exec()
 }
 
 schema.statics.disable = function (user) {
