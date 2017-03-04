@@ -47,6 +47,14 @@ const schema = mongoose.Schema({
   products: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Product'
+  }],
+  tokens: [{
+    token: String,
+    expires: Date,
+    platform: {
+      type: String,
+      enum: ['web', 'android', 'ios']
+    }
   }]
 }, {
   timestamps: true
@@ -89,6 +97,20 @@ schema.statics.byNetworkId = function(id, network) {
 schema.statics.disable = function (user) {
   user.set('active', false)
   return user
+}
+
+schema.statics.loginAccount = function (data) {
+  return this.findOne({ email: data.email }).then((user) => {
+    if (user) {
+      if (user.validPassword(data.password)) {
+        return user
+      } else {
+        throw new Error('Dados inválidos')
+      }
+    } else {
+      throw new Error('Dados inválidos')
+    }
+  })
 }
 
 schema.methods.validPassword = function (compare_password) {

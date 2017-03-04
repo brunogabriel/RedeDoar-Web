@@ -9,6 +9,7 @@ export asset from './asset'
 export pagination from './pagination'
 export uploadUtils from './upload_utils'
 export api from './api'
+export googleUtils from './google_utils'
 export * from './security'
 
 export const normalizeLocale = (locale) => {

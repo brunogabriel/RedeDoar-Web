@@ -8,9 +8,12 @@ export default (req, res, next) => {
     config.google.appSecret,
     config.google.redirectUri
   )
-  const url = oauth2Client.generateAuthUrl({
-    access_type: 'offline',
-    scope: config.google.scopes,
-  })
-  res.redirect(url)
+  if (req.query.token) {
+  } else {
+    const url = oauth2Client.generateAuthUrl({
+      access_type: 'offline',
+      scope: config.google.scopes,
+    })
+    res.redirect(url)
+  }
 }

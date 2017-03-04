@@ -2,7 +2,6 @@ import express from 'express'
 import FB from 'fb'
 
 import config from '../../config'
-import { User } from '../../models'
 import { authenticated } from '../filters'
 
 import login from './login'
@@ -16,6 +15,7 @@ import create from './create'
 
 const router = express.Router()
 
+// @todo: mover configuracao do facebook para um facebookUtils
 FB.options({
   appId: config.facebook.appId,
   appSecret: config.facebook.appSecret,
@@ -24,9 +24,9 @@ FB.options({
 
 router.post('/', create)
 router.post('/login', login)
-router.get('/facebook', facebook)
+router.get('/login/facebook', facebook)
+router.get('/login/google', google)
 router.get('/facebook/callback', facebookCallback)
-router.get('/google', google)
 router.get('/google/callback', googleCallback)
 router.post('/profile', authenticated, profile)
 router.post('/disable', authenticated, disable)

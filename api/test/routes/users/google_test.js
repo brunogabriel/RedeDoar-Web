@@ -5,14 +5,14 @@ import { app, closeConnection } from '../../test_helper'
 after(closeConnection)
 
 describe('users', () => {
-  describe('facebook', () => {
-    it('deve redirecionar para fazer login com facebook', (done) => {
+  describe('google', () => {
+    it('deve redirecionar para fazer login com google', (done) => {
       request(app)
-        .get('/users/login/facebook')
+        .get('/users/login/google')
         .expect(302)
         .end((err, res) => {
           if (err) throw new Error(err)
-          assert.include(res.header.location, 'facebook.com')
+          assert.include(res.header.location, 'google.com')
           done()
         })
     })
