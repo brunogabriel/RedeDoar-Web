@@ -14,17 +14,11 @@ export default (req, res, next) => {
               google: user_data.google
             }
             user.updateAccount(user_data_update).then((user) => {
-              res.send({
-                status: true,
-                data: user
-              })
+              res.send(User.dataLoginResponse(user, req))
             }).catch(next)
           } else {
             User.createAccount(user_data).then((user) => {
-              res.send({
-                status: true,
-                data: user
-              })
+              res.send(User.dataLoginResponse(user, req))
             }).catch(next)
           }
         })

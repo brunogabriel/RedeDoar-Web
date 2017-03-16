@@ -56,24 +56,11 @@ export default (req, res, next) => {
           }
           if (!user) {
             User.createAccount(user_data).then((user) => {
-              res.send({
-                status: true,
-                access_token: access_token,
-                expires: expires,
-                new_account: true,
-                data: user
-              })
+              res.send(User.dataLoginResponse(user, req))
             }).catch(next)
           } else {
             user.update(user_data).then((data) => {
-              res.send({
-                status: true,
-                access_token: access_token,
-                expires: expires,
-                new_account: false,
-                data: user,
-                update: data
-              })
+              res.send(User.dataLoginResponse(user, req))
             }).catch(next)
           }
         })

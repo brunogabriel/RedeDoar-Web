@@ -62,9 +62,17 @@ const schema = mongoose.Schema({
 
 schema.plugin(mongoosePaginate)
 
+schema.statics.loginFields = [
+  'name',
+  'email',
+  'gender',
+  'picture',
+  'birthday',
+  'language',
+  'active',
+]
+
 schema.statics.exceptFieldsCreate = [
-  'facebook',
-  'google',
   'active',
   'mobileDevices',
   'products'
@@ -100,7 +108,7 @@ schema.statics.disable = function (user) {
 }
 
 schema.statics.loginAccount = function (data) {
-  return this.findOne({ email: data.email }).then((user) => {
+  return this.findOne({ email: data.email, active: true }).then((user) => {
     if (user) {
       if (user.validPassword(data.password)) {
         return user
@@ -111,6 +119,33 @@ schema.statics.loginAccount = function (data) {
       throw new Error('Dados inválidos')
     }
   })
+}
+
+schema.statics.loginWithToken = function (token) {
+  let query = {
+    $or: [{
+      'facebook.accessToken': token,
+    }, {
+      'google.accessToken': token
+    }],
+    active: true
+  }
+  return this.findOne(query)
+    .select(schema.statics.loginFields.join(' '))
+    .then((user) => {
+      if (user) {
+        return user
+      } else {
+        throw new Error('Token inválido')
+      }
+    })
+}
+
+schema.statics.dataLoginResponse = function (user, req) {
+  return {
+    success: true,
+    data: user
+  }
 }
 
 schema.methods.validPassword = function (compare_password) {
