@@ -8,6 +8,10 @@ import i18n from 'i18n'
 import cookieParser from 'cookie-parser'
 import cookieSession from 'cookie-session'
 
+let app = express()
+const host = (process.env.HOST || 'localhost')
+const port = parseInt(process.env.PORT || 8000)
+
 i18n.configure({
   locales:['en', 'pt-br'],
   directory: __dirname + '/locales',
@@ -16,8 +20,7 @@ i18n.configure({
   queryParameter: 'language'
 })
 
-let app = express()
-
+app.listen(port, host)
 app.use(i18n.init)
 app.set('views', `${__dirname}/views`)
 app.set('view engine', 'jade')

@@ -46,4 +46,3 @@ api/tmp/*
 !api/tmp/.keep
 .env
 DEV.md
-api/dist
