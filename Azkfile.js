@@ -13,7 +13,7 @@ systems({
       '/azk/#{manifest.dir}': sync('./api'),
       '/azk/#{manifest.dir}/public': path('./api/public'),
       '/azk/#{manifest.dir}/tmp': path('./api/tmp'),
-      '/azk/#{manifest.dir}/node_modules': persistent('./node_modules'),
+      '/azk/#{manifest.dir}/node_modules': persistent('./api/node_modules'),
     },
     scalable: {'default': 1},
     http: {
@@ -61,7 +61,7 @@ systems({
     wait: 20,
     mounts: {
       '/azk/#{manifest.dir}': sync('./admin'),
-      '/azk/#{manifest.dir}/node_modules': persistent('./node_modules'),
+      '/azk/#{manifest.dir}/node_modules': persistent('./admin/node_modules'),
     },
     scalable: {'default': 1},
     http: {

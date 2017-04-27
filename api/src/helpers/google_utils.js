@@ -2,6 +2,7 @@ import Promise from 'bluebird'
 import google from 'googleapis'
 import moment from 'moment'
 import config from '../config'
+import { User } from '../models'
 import { normalizeLocale } from './'
 
 export default {
@@ -46,5 +47,18 @@ export default {
     }
     if (birthday) user_data.birthday = moment(birthday)
     return user_data
+  },
+  onLogin (result, tokens) {
+    return User.byNetworkId(result.id, 'google').then((user) => {
+      let user_data = this.formatUserData(result, tokens)
+      if (user) {
+        let user_data_update = {
+          google: user_data.google
+        }
+        return user.updateAccount(user_data_update)
+      } else {
+        return User.createAccount(user_data)
+      }
+    })
   }
 }

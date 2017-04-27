@@ -43,8 +43,8 @@
     "nodemon": "^1.10.2",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.15.0"
+    "webpack": "1.13.2",
+    "webpack-dev-server": "1.15.0"
   },
   "scripts": {
     "test": "node_modules/.bin/mocha --colors --compilers js:babel-core/register test",

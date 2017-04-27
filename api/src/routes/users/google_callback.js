@@ -7,21 +7,9 @@ export default (req, res, next) => {
     if (!err) {
       oauth2Client.setCredentials(tokens)
       googleUtils.getPeople(oauth2Client).then((result) => {
-        User.byNetworkId(result.id, 'google').then((user) => {
-          let user_data = googleUtils.formatUserData(result, tokens)
-          if (user) {
-            let user_data_update = {
-              google: user_data.google
-            }
-            user.updateAccount(user_data_update).then((user) => {
-              res.send(User.dataLoginResponse(user, req))
-            }).catch(next)
-          } else {
-            User.createAccount(user_data).then((user) => {
-              res.send(User.dataLoginResponse(user, req))
-            }).catch(next)
-          }
-        })
+        googleUtils.onLogin(result, tokens).then((user) => {
+          res.send(User.dataLoginResponse(user, req))
+        }).catch(next)
       }).catch(next)
     } else {
       next(err)
